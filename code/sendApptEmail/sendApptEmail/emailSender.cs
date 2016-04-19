@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Net.Mail;
+using System.Net;
 
 namespace sendApptEmail
 {
@@ -19,14 +20,14 @@ namespace sendApptEmail
         private DateTime apptStart = DateTime.Now.AddMinutes(+30);
         private DateTime apptEnd = DateTime.Now.AddMinutes(+60);
         private String location = "The Office";
-        private String mailServerIP = "localhost"; // set as optional perameter
 
-        private String mailServerIPDefault = "localhost";
+        private static String mailServerIPDefault = "localhost";
 
-        public emailSender()
-        {
+        private String mailServerIP = mailServerIPDefault; // set as optional perameter
+        private int port = 465;
+        private String userName = "gannonsga@gmail.com";
+        private String pword = "studentg";
 
-        }
 
 
         public emailSender(String mailFromAddress, String mailFromDisplayName,
@@ -53,6 +54,47 @@ namespace sendApptEmail
             {
                 this.mailServerIP = mailServerIPDefault;
             }
+        }
+
+
+        public emailSender(String mailToAddress, String mailToDisplayName,
+            DateTime apptStart, DateTime apptEnd, String location = "The Office", String mailCCAddress = null, 
+            String mailCCDisplayName = null, String mailServerIP = null)
+        {
+
+            this.mailToAddress = mailToAddress;
+            this.mailToDisplayName = mailToDisplayName;
+
+
+            this.mailCCAddress = mailCCAddress; // optional, could be null
+            this.mailCCDisplayName = mailCCDisplayName; // optional, could be null
+            this.apptStart = apptStart;
+            this.apptEnd = apptEnd;
+            this.location = location;
+
+            this.mailServerIP = mailServerIP; // set as optional perameter, could be null
+
+            if(this.mailServerIP != null) {}
+            else
+            {
+                this.mailServerIP = mailServerIPDefault;
+            }
+        }
+
+
+        public void useGoogle()
+        {
+            mailServerIP = "smtp.gmail.com";
+            mailFromAddress = "gannonsga@gmail.com";
+            mailFromDisplayName = "James";
+            this.port = 465; //587
+            var client = new SmtpClient("smtp.gmail.com", 587)
+            {
+                Credentials = new NetworkCredential("myusername@gmail.com", "mypwd"),
+                EnableSsl = true
+            };
+
+
         }
 
 
@@ -105,12 +147,13 @@ namespace sendApptEmail
             str.AppendLine("END:VCALENDAR");
 
             //Now sending a mail with attachment ICS file.                     
-            System.Net.Mail.SmtpClient smtpclient = new System.Net.Mail.SmtpClient();
+            //System.Net.Mail.SmtpClient smtpclient = new System.Net.Mail.SmtpClient();
+            System.Net.Mail.SmtpClient smtpclient = new System.Net.Mail.SmtpClient(mailServerIP, this.port);
 
-            //smtpclient.Host = "localhost"; //-------this has to given the Mailserver IP
-            smtpclient.Host = mailServerIP; //-------this has to given the Mailserver IP
+            //smtpclient.Credentials = System.Net.CredentialCache.DefaultNetworkCredentials;
+            smtpclient.Credentials = new NetworkCredential(userName, pword);
+            smtpclient.EnableSsl = true;
 
-            smtpclient.Credentials = System.Net.CredentialCache.DefaultNetworkCredentials;
 
             System.Net.Mime.ContentType contype = new System.Net.Mime.ContentType("text/calendar");
             contype.Parameters.Add("method", "REQUEST");
