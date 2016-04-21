@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="CAFEDB">
+  <DataContextMoniker Name="/CAFEDBDataContext" />
+  <nestedChildShapes>
+    <classShape Id="d24591dc-8dd4-4ada-aaa2-8afe5d631af1" absoluteBounds="1.125, 2.875, 2, 2.3478011067708335">
+      <DataClassMoniker Name="/CAFEDBDataContext/OfficeHour" />
+      <nestedChildShapes>
+        <elementListCompartment Id="aff69ee3-dcb9-42cd-9d4f-2ab897b625e3" absoluteBounds="1.1400000000000001, 3.335, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="1a239cbf-18a9-404c-adb0-02e8d7b9263c" absoluteBounds="3.625, 2.625, 2, 5.0400211588541657">
+      <DataClassMoniker Name="/CAFEDBDataContext/Faculty" />
+      <nestedChildShapes>
+        <elementListCompartment Id="2bda0d8c-b1b2-4d8d-b878-ec2210697f37" absoluteBounds="3.6399999999999997, 3.085, 1.9700000000000002, 4.4800211588541661" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(3.625 : 4.04890055338542); (3.125 : 4.04890055338542)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/CAFEDBDataContext/Faculty/Faculty_OfficeHour" />
+      <nodes>
+        <classShapeMoniker Id="1a239cbf-18a9-404c-adb0-02e8d7b9263c" />
+        <classShapeMoniker Id="d24591dc-8dd4-4ada-aaa2-8afe5d631af1" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="c939fd4b-7c66-4b04-862f-d789348c2d0b" absoluteBounds="2.75, 0.5, 2, 1.7708968098958331">
+      <DataClassMoniker Name="/CAFEDBDataContext/Term" />
+      <nestedChildShapes>
+        <elementListCompartment Id="8841954d-427b-4783-bd40-271f36bd93e3" absoluteBounds="2.7649999999999997, 0.96, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.75 : 1.38544840494792); (1.9374995 : 1.38544840494792); (1.9374995 : 2.875)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/CAFEDBDataContext/Term/Term_OfficeHour" />
+      <nodes>
+        <classShapeMoniker Id="c939fd4b-7c66-4b04-862f-d789348c2d0b" />
+        <classShapeMoniker Id="d24591dc-8dd4-4ada-aaa2-8afe5d631af1" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

@@ -1,0 +1,6 @@
+C:\Users\James\Documents\cis315_OfficeHours\code\sendApptEmail\sendApptEmail\bin\Debug\sendApptEmail.exe.config
+C:\Users\James\Documents\cis315_OfficeHours\code\sendApptEmail\sendApptEmail\bin\Debug\sendApptEmail.exe
+C:\Users\James\Documents\cis315_OfficeHours\code\sendApptEmail\sendApptEmail\bin\Debug\sendApptEmail.pdb
+C:\Users\James\Documents\cis315_OfficeHours\code\sendApptEmail\sendApptEmail\obj\Debug\sendApptEmail.csprojResolveAssemblyReference.cache
+C:\Users\James\Documents\cis315_OfficeHours\code\sendApptEmail\sendApptEmail\obj\Debug\sendApptEmail.exe
+C:\Users\James\Documents\cis315_OfficeHours\code\sendApptEmail\sendApptEmail\obj\Debug\sendApptEmail.pdb
