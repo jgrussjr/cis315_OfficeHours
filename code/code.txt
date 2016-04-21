@@ -1,0 +1,5 @@
+SELECT TOP 1000 [AppointementID]
+      ,[FacultyID]
+      ,[FromTime]
+      ,[ToTime]
+  FROM [Appointments].[dbo].[appointment]
