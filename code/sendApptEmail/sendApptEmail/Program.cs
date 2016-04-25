@@ -13,19 +13,19 @@ namespace sendApptEmail
             String requestorEmail = "gruss001@knights.gannon.edu";
             String requestorDisplayName = "James Gruss";
 
-            //String requesteeEmail = "mccracke007@knights.gannon.edu";
-            //String requesteeDisplayName = "Andrew McCracken";
+            String requesteeEmail = "mccracke007@knights.gannon.edu";
+            String requesteeDisplayName = "Andrew McCracken";
 
-            String requesteeEmail = "jgrussjr@gmail.com";
-            String requesteeDisplayName = "Google Gruss";
+            //String requesteeEmail = "jgrussjr@gmail.com";
+            //String requesteeDisplayName = "Google Gruss";
 
 
             DateTime apptStart = DateTime.UtcNow.AddMinutes(+30);
             DateTime apptEnd = DateTime.UtcNow.AddMinutes(+60);
-            //String location = "The Office";
-            //String mailCCAddress = null;
-            //String mailCCDisplayName = null; 
-            //String mailServerIP = null;
+            String location = "The Office";
+            String messageBodyProf = "Hello, I would like to meet with you to discuss the upcoming data structures assignment.";
+            String messageBodyStudent = "You have requested a meeting with " + requesteeDisplayName + " for " + apptStart.ToString();
+
 
             Console.WriteLine(apptStart.ToString());
             Console.WriteLine(apptEnd.ToString());
@@ -33,12 +33,10 @@ namespace sendApptEmail
 
 
 
-            emailSender es = new emailSender(requestorEmail, requestorDisplayName, requesteeEmail, 
-                requesteeDisplayName, apptStart, apptEnd);
+            emailSender es = new emailSender();
 
-            es.useGoogle();
-            es.Sendmail_With_IcsAttachment();
-
+            es.sendICSEmail(requestorEmail, requestorDisplayName, requesteeEmail, requesteeDisplayName,
+            apptStart, apptEnd, location, messageBodyProf);
             Console.ReadLine();
         }
     }
