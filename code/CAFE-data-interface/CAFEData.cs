@@ -15,7 +15,9 @@ namespace CAFEDataInterface
         }
         public List<Faculty> facultyList()
         {
-            return (from fac in myDB.Faculties select fac).ToList();
+            int deletedDeptID = getDeptID("deleted facutly");
+            return (from fac in myDB.Faculties where fac.DeptID != deletedDeptID
+                    select fac).ToList();
         }
 
         public List<Faculty> searchFaculty(String firstName, String lastName)
@@ -44,6 +46,43 @@ namespace CAFEDataInterface
         {
             return (from hour in myDB.OfficeHours where hour.FacultyID == facultyID 
                            && hour.TermID == termID select hour).ToList();
+        }
+
+
+        private int getDeptID(String deptName)
+        {
+            return myDB.Departments.Single(d => d.DeptName == deptName).DeptID;
+        }
+        public List<String> getDepartments()
+        {
+            var allDepartmentRecords = from deptrec in myDB.Departments select deptrec;
+
+            List<String> departmentTitleList = new List<String>();
+
+            foreach (var deptrec in allDepartmentRecords)
+            {
+                if (deptrec.DeptName.ToLower() != "deleted facutly")
+                {
+                    int numFacultyInDept = (from fac in myDB.Faculties
+                                            where fac.DeptID == deptrec.DeptID
+                                            select fac).Count();
+                    if (numFacultyInDept != 0)
+                        departmentTitleList.Add(deptrec.DeptName);
+
+                }
+                    
+            }
+
+            return departmentTitleList;
+        }
+
+        public List<Faculty> getFacultyByDepartment(String deptName)
+        {
+            int deptID = myDB.Departments.Single(d => d.DeptName == deptName).DeptID;
+
+            return (from fac in myDB.Faculties
+                    where fac.DeptID == deptID
+                    select fac).ToList();
         }
     }
 }

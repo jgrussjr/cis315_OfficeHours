@@ -39,6 +39,9 @@ namespace CAFEDataInterface
     partial void InsertTerm(Term instance);
     partial void UpdateTerm(Term instance);
     partial void DeleteTerm(Term instance);
+    partial void InsertDepartment(Department instance);
+    partial void UpdateDepartment(Department instance);
+    partial void DeleteDepartment(Department instance);
     #endregion
 		
 		public CAFEDBDataContext() : 
@@ -92,6 +95,14 @@ namespace CAFEDataInterface
 			get
 			{
 				return this.GetTable<Term>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Department> Departments
+		{
+			get
+			{
+				return this.GetTable<Department>();
 			}
 		}
 	}
@@ -460,6 +471,8 @@ namespace CAFEDataInterface
 		
 		private EntitySet<OfficeHour> _OfficeHours;
 		
+		private EntityRef<Department> _Department;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -513,6 +526,7 @@ namespace CAFEDataInterface
 		public Faculty()
 		{
 			this._OfficeHours = new EntitySet<OfficeHour>(new Action<OfficeHour>(this.attach_OfficeHours), new Action<OfficeHour>(this.detach_OfficeHours));
+			this._Department = default(EntityRef<Department>);
 			OnCreated();
 		}
 		
@@ -667,6 +681,10 @@ namespace CAFEDataInterface
 			{
 				if ((this._DeptID != value))
 				{
+					if (this._Department.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
 					this.OnDeptIDChanging(value);
 					this.SendPropertyChanging();
 					this._DeptID = value;
@@ -969,6 +987,40 @@ namespace CAFEDataInterface
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Department_Faculty", Storage="_Department", ThisKey="DeptID", OtherKey="DeptID", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		public Department Department
+		{
+			get
+			{
+				return this._Department.Entity;
+			}
+			set
+			{
+				Department previousValue = this._Department.Entity;
+				if (((previousValue != value) 
+							|| (this._Department.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Department.Entity = null;
+						previousValue.Faculties.Remove(this);
+					}
+					this._Department.Entity = value;
+					if ((value != null))
+					{
+						value.Faculties.Add(this);
+						this._DeptID = value.DeptID;
+					}
+					else
+					{
+						this._DeptID = default(int);
+					}
+					this.SendPropertyChanged("Department");
+				}
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -1185,6 +1237,240 @@ namespace CAFEDataInterface
 		{
 			this.SendPropertyChanging();
 			entity.Term = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Department")]
+	public partial class Department : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _DeptID;
+		
+		private string _DeptName;
+		
+		private string _DeptType;
+		
+		private System.Nullable<int> _SchoolID;
+		
+		private System.Nullable<int> _CollegeID;
+		
+		private string _ChairID;
+		
+		private System.Nullable<char> _Status;
+		
+		private EntitySet<Faculty> _Faculties;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnDeptIDChanging(int value);
+    partial void OnDeptIDChanged();
+    partial void OnDeptNameChanging(string value);
+    partial void OnDeptNameChanged();
+    partial void OnDeptTypeChanging(string value);
+    partial void OnDeptTypeChanged();
+    partial void OnSchoolIDChanging(System.Nullable<int> value);
+    partial void OnSchoolIDChanged();
+    partial void OnCollegeIDChanging(System.Nullable<int> value);
+    partial void OnCollegeIDChanged();
+    partial void OnChairIDChanging(string value);
+    partial void OnChairIDChanged();
+    partial void OnStatusChanging(System.Nullable<char> value);
+    partial void OnStatusChanged();
+    #endregion
+		
+		public Department()
+		{
+			this._Faculties = new EntitySet<Faculty>(new Action<Faculty>(this.attach_Faculties), new Action<Faculty>(this.detach_Faculties));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DeptID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int DeptID
+		{
+			get
+			{
+				return this._DeptID;
+			}
+			set
+			{
+				if ((this._DeptID != value))
+				{
+					this.OnDeptIDChanging(value);
+					this.SendPropertyChanging();
+					this._DeptID = value;
+					this.SendPropertyChanged("DeptID");
+					this.OnDeptIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DeptName", DbType="VarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string DeptName
+		{
+			get
+			{
+				return this._DeptName;
+			}
+			set
+			{
+				if ((this._DeptName != value))
+				{
+					this.OnDeptNameChanging(value);
+					this.SendPropertyChanging();
+					this._DeptName = value;
+					this.SendPropertyChanged("DeptName");
+					this.OnDeptNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DeptType", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string DeptType
+		{
+			get
+			{
+				return this._DeptType;
+			}
+			set
+			{
+				if ((this._DeptType != value))
+				{
+					this.OnDeptTypeChanging(value);
+					this.SendPropertyChanging();
+					this._DeptType = value;
+					this.SendPropertyChanged("DeptType");
+					this.OnDeptTypeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SchoolID", DbType="Int")]
+		public System.Nullable<int> SchoolID
+		{
+			get
+			{
+				return this._SchoolID;
+			}
+			set
+			{
+				if ((this._SchoolID != value))
+				{
+					this.OnSchoolIDChanging(value);
+					this.SendPropertyChanging();
+					this._SchoolID = value;
+					this.SendPropertyChanged("SchoolID");
+					this.OnSchoolIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CollegeID", DbType="Int")]
+		public System.Nullable<int> CollegeID
+		{
+			get
+			{
+				return this._CollegeID;
+			}
+			set
+			{
+				if ((this._CollegeID != value))
+				{
+					this.OnCollegeIDChanging(value);
+					this.SendPropertyChanging();
+					this._CollegeID = value;
+					this.SendPropertyChanged("CollegeID");
+					this.OnCollegeIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ChairID", DbType="NChar(10)")]
+		public string ChairID
+		{
+			get
+			{
+				return this._ChairID;
+			}
+			set
+			{
+				if ((this._ChairID != value))
+				{
+					this.OnChairIDChanging(value);
+					this.SendPropertyChanging();
+					this._ChairID = value;
+					this.SendPropertyChanged("ChairID");
+					this.OnChairIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="Char(1)")]
+		public System.Nullable<char> Status
+		{
+			get
+			{
+				return this._Status;
+			}
+			set
+			{
+				if ((this._Status != value))
+				{
+					this.OnStatusChanging(value);
+					this.SendPropertyChanging();
+					this._Status = value;
+					this.SendPropertyChanged("Status");
+					this.OnStatusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Department_Faculty", Storage="_Faculties", ThisKey="DeptID", OtherKey="DeptID")]
+		public EntitySet<Faculty> Faculties
+		{
+			get
+			{
+				return this._Faculties;
+			}
+			set
+			{
+				this._Faculties.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Faculties(Faculty entity)
+		{
+			this.SendPropertyChanging();
+			entity.Department = this;
+		}
+		
+		private void detach_Faculties(Faculty entity)
+		{
+			this.SendPropertyChanging();
+			entity.Department = null;
 		}
 	}
 }

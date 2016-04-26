@@ -13,7 +13,7 @@ namespace CAFEDataInterface.Tests
         {
             CAFEData test = new CAFEData();
             int count = test.facultyList().Count;
-            Assert.AreEqual(146, count);
+            Assert.AreEqual(169, count);
         }
 
         [TestMethod]
@@ -92,6 +92,22 @@ namespace CAFEDataInterface.Tests
         {
             CAFEData test = new CAFEData();
             Assert.AreEqual("CRANE003@gannon.edu", test.searchFaculty("Mary", "Crane")[0].Email);
+        }
+
+        [TestMethod]
+
+        public void checkDepartmentCount()
+        {
+            CAFEData test = new CAFEData();
+            Assert.AreEqual(22, test.getDepartments().Count);
+        }
+
+        [TestMethod]
+
+        public void checkChemistryDeptCount()
+        {
+            CAFEData test = new CAFEData();
+            Assert.AreEqual(8, test.getFacultyByDepartment("Chemistry Department").Count);
         }
     }
 }

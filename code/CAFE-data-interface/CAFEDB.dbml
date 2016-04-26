@@ -39,6 +39,7 @@
       <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="ModifiedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Association Name="Faculty_OfficeHour" Member="OfficeHours" ThisKey="FacultyID" OtherKey="FacultyID" Type="OfficeHour" />
+      <Association Name="Department_Faculty" Member="Department" ThisKey="DeptID" OtherKey="DeptID" Type="Department" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.Term" Member="Terms">
@@ -49,6 +50,18 @@
       <Column Name="StartDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="EndDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Association Name="Term_OfficeHour" Member="OfficeHours" ThisKey="TermID" OtherKey="TermID" Type="OfficeHour" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Department" Member="Departments">
+    <Type Name="Department">
+      <Column Name="DeptID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="DeptName" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="DeptType" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="SchoolID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CollegeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ChairID" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="Status" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Association Name="Department_Faculty" Member="Faculties" ThisKey="DeptID" OtherKey="DeptID" Type="Faculty" />
     </Type>
   </Table>
 </Database>

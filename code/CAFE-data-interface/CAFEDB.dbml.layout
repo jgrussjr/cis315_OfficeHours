@@ -14,7 +14,7 @@
         <elementListCompartment Id="2bda0d8c-b1b2-4d8d-b878-ec2210697f37" absoluteBounds="3.6399999999999997, 3.085, 1.9700000000000002, 4.4800211588541661" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(3.625 : 4.04890055338542); (3.125 : 4.04890055338542)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(3.625 : 4.04890055338542); (3.125 : 4.04890055338542)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/CAFEDBDataContext/Faculty/Faculty_OfficeHour" />
       <nodes>
         <classShapeMoniker Id="1a239cbf-18a9-404c-adb0-02e8d7b9263c" />
@@ -27,11 +27,24 @@
         <elementListCompartment Id="8841954d-427b-4783-bd40-271f36bd93e3" absoluteBounds="2.7649999999999997, 0.96, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(2.75 : 1.38544840494792); (1.9374995 : 1.38544840494792); (1.9374995 : 2.875)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(3.7500005 : 2.27089680989583); (3.7500005 : 2.46289680989583); (3.317 : 2.46289680989583); (3.317 : 4.04890055338542); (3.125 : 4.04890055338542)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/CAFEDBDataContext/Term/Term_OfficeHour" />
       <nodes>
         <classShapeMoniker Id="c939fd4b-7c66-4b04-862f-d789348c2d0b" />
         <classShapeMoniker Id="d24591dc-8dd4-4ada-aaa2-8afe5d631af1" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="4ffa0ce8-f3a6-41c3-b659-c6c0272f6c8b" absoluteBounds="0.5, 0.5, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/CAFEDBDataContext/Department" />
+      <nestedChildShapes>
+        <elementListCompartment Id="93415dbe-d6d4-4f83-a655-e28640c4fd61" absoluteBounds="0.515, 0.96, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(0.78125 : 2.65549967447917); (0.78125 : 6.4751611328125); (3.625 : 6.4751611328125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/CAFEDBDataContext/Department/Department_Faculty" />
+      <nodes>
+        <classShapeMoniker Id="4ffa0ce8-f3a6-41c3-b659-c6c0272f6c8b" />
+        <classShapeMoniker Id="1a239cbf-18a9-404c-adb0-02e8d7b9263c" />
       </nodes>
     </associationConnector>
   </nestedChildShapes>
