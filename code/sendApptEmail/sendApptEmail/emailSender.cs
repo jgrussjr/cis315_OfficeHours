@@ -10,12 +10,13 @@ namespace sendApptEmail
 {
     class emailSender
     {
-
+        // sending address
         private String mailFromAddress = "";
         private String mailFromDisplayName = "";
-
+        // student
         private String mailToAddress1 = "";
         private String mailToDisplayName1 = "";
+        // professor
         private String mailToAddress2 = "";
         private String mailToDisplayName2 = "";
 
@@ -24,13 +25,16 @@ namespace sendApptEmail
         private String location = "The Professor's Office";
         private String messageBody = "This meeting request was made by the Office Hours Scheduling Application";
 
-        private static String mailServerIPDefault = "localhost";
-        private String mailServerIP = mailServerIPDefault; // set as optional perameter
+        private static String mailServerAddressDefault = "localhost";
+        private String mailServerAddress = mailServerAddressDefault; // set as optional perameter
         private int port = 587; //465
-        private String userName = "gannonsga@gmail.com";
-        private String pword = "studentg";
+        private String userName = "guofficehours@gmail.com";
+        private String pword = "Gannon123";
 
+        public emailSender()
+        {
 
+        }
 
         public emailSender(String mailFromAddress, String mailFromDisplayName,
             String mailToAddress1, String mailToDisplayName1, String mailToAddress2, String mailToDisplayName2,
@@ -48,15 +52,14 @@ namespace sendApptEmail
             this.apptStart = apptStart;
             this.apptEnd = apptEnd;
             this.location = location;
-            this.mailServerIP = mailServerIP; // set as optional perameter, could be null
+            this.mailServerAddress = mailServerIP; // set as optional perameter, could be null
 
-            if(this.mailServerIP != null) {}
+            if(this.mailServerAddress != null) {}
             else
             {
-                this.mailServerIP = mailServerIPDefault;
+                this.mailServerAddress = mailServerAddressDefault;
             }
         }
-
 
         public emailSender(String mailToAddress1, String mailToDisplayName1, String mailToAddress2, String mailToDisplayName2,
             DateTime apptStart, DateTime apptEnd, String location = "The Office")
@@ -74,25 +77,24 @@ namespace sendApptEmail
         }
 
 
-        public void useGoogle()
+        private void useGoogle()
         {
-            mailServerIP = "smtp.gmail.com";
-            mailFromAddress = "gannonsga@gmail.com";
-            mailFromDisplayName = "James";
+            mailServerAddress = "smtp.gmail.com";
+            mailFromAddress = "guofficehours@gmail.com";
+            mailFromDisplayName = "GU Office Hours";
             this.port = 587; //465
-            userName = "gannonsga@gmail.com";
-            pword = "studentg";
-
+            userName = "guofficehours@gmail.com";
+            pword = "Gannon123";
         }
 
-        public void Sendmail_With_IcsAttachment()
+        private void Sendmail_With_IcsAttachment()
         {
 
             MailMessage msg = new MailMessage();
             //Now we have to set the value to Mail message properties
 
             //Note Please change it to correct mail-id to use this in your application
-            msg.From = new MailAddress(mailFromAddress, mailFromDisplayName);
+            msg.From = new MailAddress(mailFromAddress, mailFromDisplayName); //sending email address
             msg.To.Add(new MailAddress(mailToAddress1, mailToDisplayName1)); // student
             msg.To.Add(new MailAddress(mailToAddress2, mailToDisplayName2)); // proffesor
             msg.Headers.Add("Content-class", "urn:content-classes:calendarmessage");
@@ -107,9 +109,6 @@ namespace sendApptEmail
             str.AppendLine("VERSION:2.0");
             str.AppendLine("METHOD:REQUEST");
             str.AppendLine("BEGIN:VEVENT");
-            //str.AppendLine(string.Format("DTSTART:{0:yyyyMMddTHHmmssZ}", DateTime.Now.AddMinutes(+330)));
-            //str.AppendLine(string.Format("DTSTAMP:{0:yyyyMMddTHHmmssZ}", DateTime.UtcNow));
-            //str.AppendLine(string.Format("DTEND:{0:yyyyMMddTHHmmssZ}", DateTime.Now.AddMinutes(+660)));
 
             str.AppendLine(string.Format("DTSTART:{0:yyyyMMddTHHmmssZ}", apptStart));
             str.AppendLine(string.Format("DTSTAMP:{0:yyyyMMddTHHmmssZ}", DateTime.Now));
@@ -136,7 +135,7 @@ namespace sendApptEmail
 
             //Now sending an email with attachment ICS file.                     
             //System.Net.Mail.SmtpClient smtpclient = new System.Net.Mail.SmtpClient();
-            System.Net.Mail.SmtpClient smtpclient = new System.Net.Mail.SmtpClient(mailServerIP, this.port);
+            System.Net.Mail.SmtpClient smtpclient = new System.Net.Mail.SmtpClient(mailServerAddress, this.port);
 
             //smtpclient.Credentials = System.Net.CredentialCache.DefaultNetworkCredentials;
             smtpclient.Credentials = new NetworkCredential(userName, pword);
@@ -150,6 +149,26 @@ namespace sendApptEmail
             msg.AlternateViews.Add(avCal);
             smtpclient.Send(msg);
         }
+
+        public void sendICSEmail(String mailToAddress1, String mailToDisplayName1, String mailToAddress2, String mailToDisplayName2,
+            DateTime apptStart, DateTime apptEnd, String location, String messageBody)
+        {
+            this.mailToAddress1 = mailToAddress1;
+            this.mailToDisplayName1 = mailToDisplayName1;
+
+            this.mailToAddress2 = mailToAddress2;
+            this.mailToDisplayName2 = mailToDisplayName2;
+
+            this.apptStart = apptStart;
+            this.apptEnd = apptEnd;
+            this.location = location;
+            this.messageBody = messageBody;
+            useGoogle();
+            Sendmail_With_IcsAttachment();
+        }
+
+
+
 
         // getters and setters
 
@@ -198,8 +217,8 @@ namespace sendApptEmail
 
         public String MailServerIP
         {
-            get { return mailServerIP; }
-            set { mailServerIP = value; }
+            get { return mailServerAddress; }
+            set { mailServerAddress = value; }
         }
     
 
