@@ -8,101 +8,134 @@ using System.Net;
 
 namespace sendApptEmail
 {
-    class emailSender
+    class EmailSender
     {
-        // sending address
-        private String mailFromAddress = "";
-        private String mailFromDisplayName = "";
         // student
-        private String mailToAddress1 = "";
-        private String mailToDisplayName1 = "";
+        private String mailToAddress1;
+        private String mailToDisplayName1;
         // professor
-        private String mailToAddress2 = "";
-        private String mailToDisplayName2 = "";
+        private String mailToAddress2;
+        private String mailToDisplayName2;
+        // apppointment and message info
+        private DateTime apptStart;
+        private DateTime apptEnd;
+        private String location;
+        private String messageBodyProf;
+        private String messageBodyStud;
 
-        private DateTime apptStart = DateTime.Now.AddMinutes(+30);
-        private DateTime apptEnd = DateTime.Now.AddMinutes(+60);
-        private String location = "The Professor's Office";
-        private String messageBody = "This meeting request was made by the Office Hours Scheduling Application";
-
-        private static String mailServerAddressDefault = "localhost";
+        // sending address
+        private String mailFromAddress = "guofficehours@gmail.com";
+        private String mailFromDisplayName = "GU Office Hours";
+        // SMTP information
+        private static String mailServerAddressDefault = "smtp.gmail.com";
         private String mailServerAddress = mailServerAddressDefault; // set as optional perameter
-        private int port = 587; //465
+        private int port = 587; //465 google ports
         private String userName = "guofficehours@gmail.com";
         private String pword = "Gannon123";
 
-        public emailSender()
+        public EmailSender()
         {
 
         }
 
-        public emailSender(String mailFromAddress, String mailFromDisplayName,
-            String mailToAddress1, String mailToDisplayName1, String mailToAddress2, String mailToDisplayName2,
-            DateTime apptStart, DateTime apptEnd, String location, String mailServerIP = null)
+
+        // the method that the system should use to send the email. This validates and cleans the data
+        public void sendEmailInvite(String mailToAddressStudent, String mailToDisplayNameStudent, String mailToAddressProf,
+            String mailToDisplayNameProf, DateTime apptStart, String location = null, String messageBodyProf = null, String messageBodyStud = null)
         {
+            DateTime apptEnd = apptStart;
+            apptEnd = apptEnd.AddMinutes(+30);
 
-            this.mailFromAddress = mailFromAddress;
-            this.mailFromDisplayName = mailFromDisplayName;
-            this.mailToAddress1 = mailToAddress1;
-            this.mailToDisplayName1 = mailToDisplayName1;
-            this.mailToAddress2 = mailToAddress2;
-            this.mailToDisplayName2 = mailToDisplayName2;
+            mailToAddressStudent = mailToAddressStudent.Trim();
+            mailToDisplayNameStudent = mailToDisplayNameStudent.Trim();
+            mailToAddressProf = mailToAddressProf.Trim();
+            mailToDisplayNameProf = mailToDisplayNameProf.Trim();
 
-            
-            this.apptStart = apptStart;
-            this.apptEnd = apptEnd;
-            this.location = location;
-            this.mailServerAddress = mailServerIP; // set as optional perameter, could be null
 
-            if(this.mailServerAddress != null) {}
+            if (location != null) 
+            {
+                location = location.Trim();
+            }
             else
             {
-                this.mailServerAddress = mailServerAddressDefault;
+                location = mailToDisplayNameProf + "'s Office";
             }
+
+            if (messageBodyProf != null) 
+            {
+                messageBodyProf = messageBodyProf.Trim();
+            }
+            else
+            {
+                messageBodyProf = "A request has been made by " + mailToDisplayNameStudent +
+                    " to meet with you during your office hours at " + apptStart.ToString() + " until " + apptEnd.ToString() +
+                    ". Please accept or decline the request. This message has been sent via the Office Hours Scheduling System.";
+            }
+
+            if (messageBodyStud != null) 
+            {
+                messageBodyStud = messageBodyStud.Trim();
+            }
+            else
+            {
+                messageBodyStud = "You have requested to meet " + mailToDisplayNameProf +
+                    " during normal office hours at " + apptStart.ToString() + " until " + apptEnd.ToString() +
+                    " The professor should respond to this outlook" +
+                    " invitation by accepting or denying the request." +
+                    " This message has been sent via the Office Hours Scheduling System.";
+            }
+
+            // set values in class
+            this.setICSEmailValues(mailToAddressStudent, mailToDisplayNameStudent, mailToAddressProf, mailToDisplayNameProf,
+            apptStart, apptEnd, location, messageBodyProf, messageBodyStud);
+            // prepare and mail ics and emails from class data
+            this.SendEmailWithIcsAttachment();
         }
 
-        public emailSender(String mailToAddress1, String mailToDisplayName1, String mailToAddress2, String mailToDisplayName2,
-            DateTime apptStart, DateTime apptEnd, String location = "The Office")
+
+        // method that sets the values needed to send the email
+        private void setICSEmailValues(String mailToAddressStudent, String mailToDisplayNameStudent, 
+            String mailToAddressProf, String mailToDisplayNameProf,
+            DateTime apptStart, DateTime apptEnd, String location, String messageBodyProf, String messageBodyStud)
         {
 
-            this.mailToAddress1 = mailToAddress1;
-            this.mailToDisplayName1 = mailToDisplayName1;
+            this.mailToAddress1 = mailToAddressStudent;
+            this.mailToDisplayName1 = mailToDisplayNameStudent;
 
-            this.mailToAddress2 = mailToAddress2;
-            this.mailToDisplayName2 = mailToDisplayName2;
+            this.mailToAddress2 = mailToAddressProf;
+            this.mailToDisplayName2 = mailToDisplayNameProf;
 
             this.apptStart = apptStart;
             this.apptEnd = apptEnd;
             this.location = location;
+            this.messageBodyProf = messageBodyProf;
+            this.messageBodyStud = messageBodyStud;
         }
 
 
-        private void useGoogle()
-        {
-            mailServerAddress = "smtp.gmail.com";
-            mailFromAddress = "guofficehours@gmail.com";
-            mailFromDisplayName = "GU Office Hours";
-            this.port = 587; //465
-            userName = "guofficehours@gmail.com";
-            pword = "Gannon123";
-        }
-
-        private void Sendmail_With_IcsAttachment()
+        // method that prepares and sends the two emails with an ics in each
+        private void SendEmailWithIcsAttachment()
         {
 
-            MailMessage msg = new MailMessage();
+            MailMessage msgProf = new MailMessage();
+            MailMessage msgStud = new MailMessage();
             //Now we have to set the value to Mail message properties
 
             //Note Please change it to correct mail-id to use this in your application
-            msg.From = new MailAddress(mailFromAddress, mailFromDisplayName); //sending email address
-            msg.To.Add(new MailAddress(mailToAddress1, mailToDisplayName1)); // student
-            msg.To.Add(new MailAddress(mailToAddress2, mailToDisplayName2)); // proffesor
-            msg.Headers.Add("Content-class", "urn:content-classes:calendarmessage");
-            msg.Subject = "Office Hours Request: " + mailToDisplayName1 + " - " + mailToDisplayName2;
-            msg.Body = messageBody;
+            msgProf.From = new MailAddress(mailFromAddress, mailFromDisplayName); //sending email address
+            msgProf.To.Add(new MailAddress(mailToAddress2, mailToDisplayName2)); // professor
+            msgProf.Headers.Add("Content-class", "urn:content-classes:calendarmessage");
+            msgProf.Subject = "Office Hours Request: " + mailToDisplayName1 + " - " + mailToDisplayName2;
+            msgProf.Body = messageBodyProf;
+
+            msgStud.From = new MailAddress(mailFromAddress, mailFromDisplayName); //sending email address
+            msgStud.To.Add(new MailAddress(mailToAddress1, mailToDisplayName1)); // student
+            msgStud.Headers.Add("Content-class", "urn:content-classes:calendarmessage");
+            msgStud.Subject = "Office Hours Request: " + mailToDisplayName2 + " - " + mailToDisplayName1;
+            msgStud.Body = messageBodyStud;
 
 
-            // Now Contruct the ICS file using string builder
+            // Contruct the ICS file using string builder
             StringBuilder str = new StringBuilder();
             str.AppendLine("BEGIN:VCALENDAR");
             str.AppendLine("PRODID:-//Schedule a Meeting");
@@ -116,14 +149,13 @@ namespace sendApptEmail
 
             str.AppendLine("LOCATION: " + this.location);
             str.AppendLine(string.Format("UID:{0}", Guid.NewGuid()));
-            str.AppendLine(string.Format("DESCRIPTION:{0}", msg.Body));
-            str.AppendLine(string.Format("X-ALT-DESC;FMTTYPE=text/html:{0}", msg.Body));
+            str.AppendLine(string.Format("DESCRIPTION:{0}", msgProf.Body));
+            str.AppendLine(string.Format("X-ALT-DESC;FMTTYPE=text/html:{0}", msgProf.Body));
             str.AppendLine(string.Format("SUMMARY:{0}", "Meeting: " + mailToDisplayName1 + " - " + mailToDisplayName2));
-            //str.AppendLine(string.Format("ORGANIZER:MAILTO:{0}", msg.From.Address));
-            str.AppendLine(string.Format("ORGANIZER;CN=\"{0}\":MAILTO:{1}", msg.To[0].DisplayName, msg.To[0].Address));
+            str.AppendLine(string.Format("ORGANIZER;CN=\"{0}\":MAILTO:{1}", msgStud.To[0].DisplayName, msgStud.To[0].Address));
 
-            //str.AppendLine(string.Format("ATTENDEE;CN=\"{0}\";RSVP=TRUE:mailto:{1}", msg.To[0].DisplayName, msg.To[0].Address));
-            str.AppendLine(string.Format("ATTENDEE;CN=\"{0}\";RSVP=TRUE:mailto:{1}", msg.To[1].DisplayName, msg.To[1].Address));
+            str.AppendLine(string.Format("ATTENDEE;CN=\"{0}\";RSVP=TRUE:mailto:{1}", msgProf.To[0].DisplayName, msgProf.To[0].Address));
+            str.AppendLine(string.Format("ATTENDEE;CN=\"{0}\";RSVP=FALSE:mailto:{1}", msgStud.To[0].DisplayName, msgStud.To[0].Address));
 
             str.AppendLine("BEGIN:VALARM");
             str.AppendLine("TRIGGER:-PT15M");
@@ -146,32 +178,13 @@ namespace sendApptEmail
             contype.Parameters.Add("method", "REQUEST");
             contype.Parameters.Add("name", "Meeting.ics");
             AlternateView avCal = AlternateView.CreateAlternateViewFromString(str.ToString(), contype);
-            msg.AlternateViews.Add(avCal);
-            smtpclient.Send(msg);
+            msgProf.AlternateViews.Add(avCal);
+            msgStud.AlternateViews.Add(avCal);
+            smtpclient.Send(msgStud);
+            smtpclient.Send(msgProf);
         }
-
-        public void sendICSEmail(String mailToAddress1, String mailToDisplayName1, String mailToAddress2, String mailToDisplayName2,
-            DateTime apptStart, DateTime apptEnd, String location, String messageBody)
-        {
-            this.mailToAddress1 = mailToAddress1;
-            this.mailToDisplayName1 = mailToDisplayName1;
-
-            this.mailToAddress2 = mailToAddress2;
-            this.mailToDisplayName2 = mailToDisplayName2;
-
-            this.apptStart = apptStart;
-            this.apptEnd = apptEnd;
-            this.location = location;
-            this.messageBody = messageBody;
-            useGoogle();
-            Sendmail_With_IcsAttachment();
-        }
-
-
-
 
         // getters and setters
-
         public String MailFromAddress
         {
             get { return mailFromAddress; }
@@ -183,7 +196,6 @@ namespace sendApptEmail
             get { return mailFromDisplayName; }
             set { mailFromDisplayName = value; }
         }
-
 
         public String MailToAddress
         {
@@ -220,7 +232,6 @@ namespace sendApptEmail
             get { return mailServerAddress; }
             set { mailServerAddress = value; }
         }
-    
-
+   
     }
 }

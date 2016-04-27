@@ -1,4 +1,7 @@
-﻿using System;
+﻿// This is a demo class for the classes
+
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,31 +16,39 @@ namespace sendApptEmail
             String requestorEmail = "gruss001@knights.gannon.edu";
             String requestorDisplayName = "James Gruss";
 
-            String requesteeEmail = "mccracke007@knights.gannon.edu";
-            String requesteeDisplayName = "Andrew McCracken";
+            //String requesteeEmail = "mccracke007@knights.gannon.edu";
+            //String requesteeDisplayName = "Andrew McCracken";
 
-            //String requesteeEmail = "jgrussjr@gmail.com";
-            //String requesteeDisplayName = "Google Gruss";
+            String requesteeEmail = "jgrussjr@gmail.com";
+            String requesteeDisplayName = "Prof JG";
+
+            //String requesteeEmail = "carlin010@knights.gannon.edu";
+            //String requesteeDisplayName = "Nate Carlin";
+
+
+            //String requestorEmail = "jgrussjr@gmail.com";
+            //String requestorDisplayName = "Google Gruss";
+
+            //String requesteeEmail = "gruss001@knights.gannon.edu";
+            //String requesteeDisplayName = "James Gruss";
 
 
             DateTime apptStart = DateTime.UtcNow.AddMinutes(+30);
-            DateTime apptEnd = DateTime.UtcNow.AddMinutes(+60);
-            String location = "The Office";
+            String location = "The Office - test";
             String messageBodyProf = "Hello, I would like to meet with you to discuss the upcoming data structures assignment.";
-            String messageBodyStudent = "You have requested a meeting with " + requesteeDisplayName + " for " + apptStart.ToString();
-
-
-            Console.WriteLine(apptStart.ToString());
-            Console.WriteLine(apptEnd.ToString());
+            String messageBodyStud = "You have requested a meeting with " + requesteeDisplayName + " for " + apptStart.ToString();
 
 
 
+            EmailSender es = new EmailSender();
 
-            emailSender es = new emailSender();
+            //es.sendEmailInvite(requestorEmail, requestorDisplayName, requesteeEmail, requesteeDisplayName,
+            //apptStart, location, messageBodyProf, messageBodyStud);
 
-            es.sendICSEmail(requestorEmail, requestorDisplayName, requesteeEmail, requesteeDisplayName,
-            apptStart, apptEnd, location, messageBodyProf);
-            Console.ReadLine();
+            es.sendEmailInvite(requestorEmail, requestorDisplayName, requesteeEmail, requesteeDisplayName,
+            apptStart);
+
+
         }
     }
 }
