@@ -106,21 +106,23 @@ namespace OfficeHours
 
         protected void Button3_Click(object sender, EventArgs e)
         {
-            EmailSender es = new EmailSender();
+            //EmailSender es = new EmailSender();
 
-            String studentemail = Session["email"].ToString();
-            String studentname = "Andrew McCracken";
-            String professoremail = "gruss001@knights.gannon.edu";
-            String professorname = DropDownList2.SelectedValue.ToString();
-            DateTime startDateTime = Calendar1.SelectedDate;
-            String location = null;
-            String messageProf = TextBox1.Text.ToString();
-            String messageStud = null;
+            //String studentemail = Session["email"].ToString();
+            //String studentname = "Andrew McCracken";
+            //String professoremail = "gruss001@knights.gannon.edu";
+            //String professorname = DropDownList2.SelectedValue.ToString();
+            //DateTime startDateTime = Calendar1.SelectedDate;
+            //String location = null;
+            //String messageProf = TextBox1.Text.ToString();
+            //String messageStud = null;
 
 
 
-            es.sendEmailInvite(studentemail, studentname, professoremail,
-                professorname, startDateTime, location, messageProf, messageStud);
+            //es.sendEmailInvite(studentemail, studentname, professoremail,
+            //    professorname, startDateTime, location, messageProf, messageStud);
+
+            Session["confirm"] = "Your Request Has Successfully Been Made!";
 
             Response.Redirect("http://localhost:2966/welcome.aspx");
         }

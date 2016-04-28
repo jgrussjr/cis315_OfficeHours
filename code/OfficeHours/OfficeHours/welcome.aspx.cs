@@ -14,6 +14,10 @@ namespace OfficeHours
             //DropDownList1.Items.Insert(0, new ListItem(string.Empty, string.Empty));
             //Session["dropdown"] = DropDownList1.Text;
             Session["email"] = TextBox1.Text;
+            if (Session["confirm"] != null)
+            {
+                Label3.Text = Session["confirm"].ToString();
+            }
 
         }
 
