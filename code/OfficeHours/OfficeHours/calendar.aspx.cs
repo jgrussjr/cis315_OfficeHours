@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using sendApptEmail;
 
 namespace OfficeHours
 {
@@ -103,9 +104,14 @@ namespace OfficeHours
                 " " + Calendar1.SelectedDate.ToShortDateString() + " " + RadioButtonList1.SelectedItem.ToString() + ".";
         }
 
-    //protected void Button1_Click(object sender, EventArgs e)
-    //{
-    //
-    //}
-}
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            EmailSender es = new EmailSender();
+
+            String email = Session["email"].ToString();
+
+
+            //es.sendEmailInvite()
+        }
+    }
 }

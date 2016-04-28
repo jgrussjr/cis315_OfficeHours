@@ -129,6 +129,8 @@
     <Compile Include="calendar.aspx.designer.cs">
       <DependentUpon>calendar.aspx</DependentUpon>
     </Compile>
+    <Compile Include="emailSender.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="welcome.aspx.cs">
       <DependentUpon>welcome.aspx</DependentUpon>
