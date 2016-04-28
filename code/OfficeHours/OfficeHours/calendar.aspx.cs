@@ -38,13 +38,13 @@ namespace OfficeHours
             if (Session["email"] != null)
             {
                 //Label6.Text = Session["email"].ToString();
-                Label6.Text = HiddenField1.Value.ToString();
+                Label6.Text = Session["email"].ToString();
             }
             else
             {
                 Label10.Text = "**You are not logged in! Please click 'Go Back' and log in to use the system.**";
-                Button1.Enabled = false;
-                Button1.UseSubmitBehavior = false;
+                Button3.Enabled = false;
+                Button3.UseSubmitBehavior = false;
             }
 
             TableRow tRow = new TableRow();
@@ -104,14 +104,25 @@ namespace OfficeHours
                 " " + Calendar1.SelectedDate.ToShortDateString() + " " + RadioButtonList1.SelectedItem.ToString() + ".";
         }
 
-        protected void Button1_Click(object sender, EventArgs e)
+        protected void Button3_Click(object sender, EventArgs e)
         {
             EmailSender es = new EmailSender();
 
-            String email = Session["email"].ToString();
+            String studentemail = Session["email"].ToString();
+            String studentname = "Andrew McCracken";
+            String professoremail = "gruss001@knights.gannon.edu";
+            String professorname = DropDownList2.SelectedValue.ToString();
+            DateTime startDateTime = Calendar1.SelectedDate;
+            String location = null;
+            String messageProf = TextBox1.Text.ToString();
+            String messageStud = null;
 
 
-            //es.sendEmailInvite()
+
+            es.sendEmailInvite(studentemail, studentname, professoremail,
+                professorname, startDateTime, location, messageProf, messageStud);
+
+            Response.Redirect("http://localhost:2966/welcome.aspx");
         }
     }
 }

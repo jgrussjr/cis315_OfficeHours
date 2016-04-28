@@ -89,7 +89,26 @@ namespace sendApptEmail
             this.setICSEmailValues(mailToAddressStudent, mailToDisplayNameStudent, mailToAddressProf, mailToDisplayNameProf,
             apptStart, apptEnd, location, messageBodyProf, messageBodyStud);
             // prepare and mail ics and emails from class data
+
             this.SendEmailWithIcsAttachment();
+
+            /*
+            Console.Out.WriteLine("Student email: " + mailToAddress1);
+            Console.Out.WriteLine("Student name: " + mailToDisplayName1);
+
+            Console.Out.WriteLine("Professor email: " + mailToAddress2);
+            Console.Out.WriteLine("Professor name: " + mailToDisplayName2);
+
+            Console.Out.WriteLine("appt start: " + this.apptStart.ToString());
+            Console.Out.WriteLine("appt end: " + this.apptEnd.ToString());
+
+            Console.Out.WriteLine("Location: " + this.location);
+            Console.Out.WriteLine("Professor Message: " + this.messageBodyProf);
+            Console.Out.WriteLine("Student Message: " + this.messageBodyStud);
+            
+            Console.ReadKey();
+            */
+
         }
 
 

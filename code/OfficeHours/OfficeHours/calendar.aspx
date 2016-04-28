@@ -59,7 +59,7 @@
             <asp:ListItem Value="3:15">3:15</asp:ListItem>
         </asp:RadioButtonList>
         <asp:TextBox ID="TextBox1" runat="server" TextMode="MultiLine" style="z-index: 1; resize:none; left: 387px; top: 380px; position: absolute; height: 153px; width: 440px"></asp:TextBox>
-        <asp:Button ID="Button1" runat="server" autopostback="true" style="z-index: 1; left: 689px; top: 547px; position: absolute; width: 145px; " Text="Submit Request"OnClick="Button1_Click" />
+        
         <asp:DropDownList ID="DropDownList2" runat="server" autopostback="true" style="z-index: 1; left: 172px; top: 403px; position: absolute; right: 1546px;">
             <asp:ListItem>Brinkman</asp:ListItem>
             <asp:ListItem>Frezza</asp:ListItem>
@@ -81,6 +81,7 @@
         <p>
             &nbsp;</p>
         <asp:HiddenField ID="HiddenField1" runat="server" />
+        <asp:Button ID="Button3" runat="server" OnClick="Button3_Click" style="z-index: 1; left: 722px; top: 545px; position: absolute" Text="Button" />
     </form>
 </body>
 </html>
