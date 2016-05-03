@@ -14,8 +14,11 @@ namespace OfficeHours
         private static CAFEData datasource = new CAFEData();
         private string currentDept;
         private string currentProf;
+        private string currentFacultyEmail;
+        private string currentOffice;
         protected void Page_Load(object sender, EventArgs e)
         {
+
             if (!IsPostBack)
             {
                 Label10.ForeColor = System.Drawing.Color.Red;
@@ -27,7 +30,6 @@ namespace OfficeHours
                 List<String> departments = datasource.getDepartments();
 
                 DropDownList3.Items.Clear();
-                //RadioButtonList1.Items.Clear();
 
                 for (int i = 0; i < departments.Count(); i++)
                 {
@@ -59,12 +61,6 @@ namespace OfficeHours
             updateAvailableHoursTable();
         }
 
-        //private void Calendar1_SelectionChanged(object sender, EventArgs e)
-        //{
-        //    RadioButtonList1.Items.Clear();
-        //    //updateAvailableHoursTable();
-        //}
-
         protected void RadioButtonList1_SelectedIndexChanged(object sender, EventArgs e)
         {
             TextBox1.Text = "I would like to request a meeting during your office hours on " + Calendar1.SelectedDate.DayOfWeek.ToString() +
@@ -76,18 +72,18 @@ namespace OfficeHours
             EmailSender es = new EmailSender();
 
             String studentemail = Session["email"].ToString();
-            String studentname = Session["email"].ToString(); // AccountDatabase Query
-            String professoremail = "mccracke007@knights.gannon.edu"; // CAFE Database Query
+            String studentname = Session["email"].ToString(); // Account Database Query
+            String professoremail = currentFacultyEmail; // CAFE Database Query
             String professorname = DropDownList2.SelectedValue.ToString();
             DateTime startDateTime = Calendar1.SelectedDate; // Make date time object with day (from calendar) and time (from radio button selection)
-            String location = null; // CAFE Database Query
+            String location = currentOffice; // CAFE Database Query
             String messageProf = TextBox1.Text.ToString();
             String messageStud = null;
 
 
             // Sends the email:
-            //es.sendEmailInvite(studentemail, studentname, professoremail,
-            //    professorname, startDateTime, location, messageProf, messageStud);
+            // es.sendEmailInvite(studentemail, studentname, professoremail,
+            // professorname, startDateTime, location, messageProf, messageStud);
 
             Session["confirm"] = "Your Request Has Successfully Been Made!";
 
@@ -110,7 +106,6 @@ namespace OfficeHours
 
             if (Session["email"] != null)
             {
-                //Label6.Text = Session["email"].ToString();
                 Label6.Text = Session["email"].ToString();
             }
             else
@@ -123,6 +118,10 @@ namespace OfficeHours
             int currentTerm = datasource.getTermID(Calendar1.SelectedDate);
             List<CAFEDataInterface.Faculty> facultyRecords = datasource.searchLastName(currentProf);
             int currentFacultyID = facultyRecords[0].FacultyID;
+            string currentFacultyEmail = facultyRecords[0].Email;
+            string currentOffice = facultyRecords[0].Office;
+            this.setFacultyEmail(currentFacultyEmail);
+            this.setFacultyOffice(currentOffice);
 
             List<CAFEDataInterface.OfficeHour> currentOfficeHours = datasource.getOfficeHours(currentFacultyID, currentTerm);
 
@@ -230,6 +229,23 @@ namespace OfficeHours
 
                 }
             }
+        }
+        //OnSelectionChanged="Calendar1_SelectionChanged"
+        protected void Calendar1_SelectionChanged(object sender, EventArgs e)
+        {
+            currentProf = DropDownList2.SelectedValue;
+            RadioButtonList1.Items.Clear();
+            updateAvailableHoursTable();
+        }
+
+        private void setFacultyEmail(String email)
+        {
+            this.currentFacultyEmail = email;
+        }
+
+        private void setFacultyOffice(String office)
+        {
+            this.currentOffice = office;
         }
     }
 }

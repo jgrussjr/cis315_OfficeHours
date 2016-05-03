@@ -38,7 +38,7 @@
         <p>
         <asp:Label ID="Label3" runat="server" style="z-index: 1; left: 232px; top: 376px; position: absolute; bottom: 199px;" Text="Choose Time:"></asp:Label>
             <asp:Label ID="Label6" runat="server" style="z-index: 1; left: 105px; top: 95px; position: absolute; width: 357px; height: 27px;" inputtype="text" placeholder="search" ></asp:Label>
-            <asp:Calendar ID="Calendar1" runat="server" autopostback="true" BackColor="White" BorderColor="Black" BorderStyle="Solid" CellSpacing="1" Font-Names="Verdana" Font-Size="9pt" ForeColor="Black" NextPrevFormat="ShortMonth" style="z-index: 1; left: 12px; top: 124px; position: absolute; height: 244px; width: 357px" >
+            <asp:Calendar ID="Calendar1" runat="server" OnSelectionChanged="Calendar1_SelectionChanged" autopostback="true" BackColor="White" BorderColor="Black" BorderStyle="Solid" CellSpacing="1" Font-Names="Verdana" Font-Size="9pt" ForeColor="Black" NextPrevFormat="ShortMonth" style="z-index: 1; left: 12px; top: 124px; position: absolute; height: 244px; width: 357px" >
                 <DayHeaderStyle Font-Bold="True" Font-Size="8pt" ForeColor="#333333" Height="8pt" />
                 <DayStyle BackColor="#CCCCCC" />
                 <NextPrevStyle Font-Bold="True" Font-Size="8pt" ForeColor="White" />
