@@ -35,7 +35,7 @@
         <p>
         <asp:Label ID="Label3" runat="server" style="z-index: 1; left: 280px; top: 376px; position: absolute; bottom: 296px;" Text="Choose Time:"></asp:Label>
             <asp:Label ID="Label6" runat="server" style="z-index: 1; left: 105px; top: 95px; position: absolute; width: 357px; height: 27px;" inputtype="text" placeholder="search" ></asp:Label>
-            <asp:Calendar ID="Calendar1" runat="server" autopostback="true" BackColor="White" BorderColor="Black" BorderStyle="Solid" CellSpacing="1" Font-Names="Verdana" Font-Size="9pt" ForeColor="Black" NextPrevFormat="ShortMonth" style="z-index: 1; left: 12px; top: 124px; position: absolute; height: 244px; width: 357px">
+            <asp:Calendar ID="Calendar1" runat="server" autopostback="true" BackColor="White" BorderColor="Black" BorderStyle="Solid" CellSpacing="1" Font-Names="Verdana" Font-Size="9pt" ForeColor="Black" NextPrevFormat="ShortMonth" style="z-index: 1; left: 12px; top: 124px; position: absolute; height: 244px; width: 357px" >
                 <DayHeaderStyle Font-Bold="True" Font-Size="8pt" ForeColor="#333333" Height="8pt" />
                 <DayStyle BackColor="#CCCCCC" />
                 <NextPrevStyle Font-Bold="True" Font-Size="8pt" ForeColor="White" />
@@ -53,21 +53,14 @@
         
         
         <asp:RadioButtonList ID="RadioButtonList1" runat="server" AutoPostBack="true" style="z-index: 1; left: 294px; top: 397px; position: absolute; height: 33px; width: 111px" OnSelectedIndexChanged="RadioButtonList1_SelectedIndexChanged">
-            <asp:ListItem Value="12:00">12:00</asp:ListItem>
-            <asp:ListItem Value="12:30">12:30</asp:ListItem>
-            <asp:ListItem Value="2:45">2:45</asp:ListItem>
-            <asp:ListItem Value="3:15">3:15</asp:ListItem>
         </asp:RadioButtonList>
         <asp:TextBox ID="TextBox1" runat="server" TextMode="MultiLine" style="z-index: 1; resize:none; left: 387px; top: 380px; position: absolute; height: 153px; width: 440px"></asp:TextBox>
         
-        <asp:DropDownList ID="DropDownList2" runat="server" autopostback="true" style="z-index: 1; left: 172px; top: 403px; position: absolute; right: 1546px;">
-            <asp:ListItem>Brinkman</asp:ListItem>
-            <asp:ListItem>Frezza</asp:ListItem>
-            <asp:ListItem>Tang</asp:ListItem>
+        <asp:DropDownList ID="DropDownList2" runat="server" autopostback="True" style="z-index: 1; left: 172px; top: 403px; position: absolute; right: 1546px;" OnSelectedIndexChanged="DropDownList2_SelectedIndexChanged">
         </asp:DropDownList>
         <asp:Label ID="Label7" runat="server" style="z-index: 1; left: 153px; top: 376px; position: absolute" Text="Choose Professor:"></asp:Label>
         <asp:Label ID="Label8" runat="server" style="z-index: 1; left: 19px; top: 376px; position: absolute" Text="Department Filter:"></asp:Label>
-        <asp:DropDownList ID="DropDownList3" autopostback="true" runat="server" style="z-index: 1; left: 17px; top: 403px; position: absolute">
+        <asp:DropDownList ID="DropDownList3" autopostback="True" runat="server" style="z-index: 1; left: 17px; top: 403px; position: absolute" Width="125px" OnSelectedIndexChanged="DropDownList3_SelectedIndexChanged">
             <asp:ListItem>Computer Science</asp:ListItem>
         </asp:DropDownList>
         <asp:Label ID="Label9" runat="server" font-size="11pt" style="z-index: 1; left: 836px; top: 396px; position: absolute; height: 207px; width: 225px" Text="Note: Upon submission, the selected professor will receive a calender invitation for the selected date and time. The message you type will also be included with this email."></asp:Label>

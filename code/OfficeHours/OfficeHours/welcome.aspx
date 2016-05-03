@@ -13,7 +13,8 @@
         <asp:Label ID="Label1" runat="server" style="z-index: 1; left: 31px; top: 157px; position: absolute" Text="Login or"></asp:Label>
     
         <asp:Label ID="Label2" runat="server" style="z-index: 1; left: 14px; top: 15px; position: absolute; height: 39px; width: 564px;" Text="Welcome to the Office Hours System!" Font-Bold="True" Font-Size="X-Large"></asp:Label>
-        <asp:TextBox ID="TextBox1" TextMode="Email" AutoPostBack="true" placeholder="Email" runat="server" style="z-index: 1; left: 16px; top: 184px; position: absolute; width: 246px; height: 27px;"></asp:TextBox>
+        <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ValidationGroup="Validation1" ErrorMessage="Please enter a @knights.gannon.edu email address." style="z-index: 1; left: 269px; top: 190px; position: absolute" ControlToValidate="TextBox1" ValidationExpression="^[a-z]+[0-9]{3}@knights\.gannon\.edu" ForeColor="#CC0000"></asp:RegularExpressionValidator>
+        <asp:TextBox ID="TextBox1" TextMode="Email" placeholder="Email" runat="server" style="z-index: 1; left: 16px; top: 184px; position: absolute; width: 246px; height: 27px;"></asp:TextBox>
         <asp:TextBox ID="TextBox2" runat="server" placeholder="Password" TextMode="Password" style="z-index: 1; left: 16px; top: 222px; position: absolute; width: 246px; height: 27px;"></asp:TextBox>
         <asp:Button ID="Button4" runat="server" OnClientClick="window.location.href='http://localhost:2966/account.aspx'; return false;" style="z-index: 1; left: 99px; top: 155px; position: absolute; width: 145px;" Text="Create Account" />
     </div>

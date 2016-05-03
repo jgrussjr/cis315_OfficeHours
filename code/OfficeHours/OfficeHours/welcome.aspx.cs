@@ -9,21 +9,23 @@ namespace OfficeHours
 {
     public partial class WebForm1 : System.Web.UI.Page
     {
+        private static LoginManagerDataContext datasource = new LoginManagerDataContext();
+
         protected void Page_Load(object sender, EventArgs e)
         {
             //DropDownList1.Items.Insert(0, new ListItem(string.Empty, string.Empty));
             //Session["dropdown"] = DropDownList1.Text;
 
-            if (TextBox1.Text.ToString() == "" || TextBox1.Text.ToString() == null)
-            {
-                Button5.Enabled = false;
-                Button5.UseSubmitBehavior = false;
-            }
-            else
-            {
-                Button5.Enabled = true;
-                Button5.UseSubmitBehavior = true;
-            }
+            //if (TextBox1.Text.ToString() == "" || TextBox1.Text.ToString() == null)
+            //{
+            //    Button5.Enabled = false;
+            //    Button5.UseSubmitBehavior = false;
+            //}
+            //else
+            //{
+            //    Button5.Enabled = true;
+            //    Button5.UseSubmitBehavior = true;
+            //}
      
             Session["email"] = TextBox1.Text;
     
@@ -35,7 +37,6 @@ namespace OfficeHours
             {
                 Label3.Text = null;
             }
-                
         }
 
         // Query Account Database to validate email/password
