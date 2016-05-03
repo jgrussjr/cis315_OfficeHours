@@ -16,21 +16,12 @@ namespace OfficeHours
         private string currentProf;
         protected void Page_Load(object sender, EventArgs e)
         {
-            //if (Session["email"] != null)
-            //{
-            //    HiddenField1.Value = Session["email"].ToString();
-            //}
-
-
-            //Calendar1.SelectedDate = Calendar1.TodaysDate;
-
-
             if (!IsPostBack)
             {
                 Label10.ForeColor = System.Drawing.Color.Red;
                 Session["confirm"] = "";
 
-                Calendar1.TodaysDate = new DateTime(2015, 11, 1);
+                Calendar1.TodaysDate = new DateTime(2015, 11, 2);
                 Calendar1.SelectedDate = Calendar1.TodaysDate;
 
                 List<String> departments = datasource.getDepartments();
