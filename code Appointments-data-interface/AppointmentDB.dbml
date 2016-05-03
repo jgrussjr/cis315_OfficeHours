@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Appointments" Class="AppointmentDBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=NAIF-PC\SQLEXPRESS;Initial Catalog=Appointments;Integrated Security=True" SettingsObjectName="Appointment.Properties.Settings" SettingsPropertyName="AppointmentsConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.appointment" Member="appointments">
+    <Type Name="appointment">
+      <Column Name="AppointementID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="FacultyID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="FromTime" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+      <Column Name="ToTime" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+    </Type>
+  </Table>
+</Database>
