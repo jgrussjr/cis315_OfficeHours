@@ -1,4 +1,6 @@
-﻿using System;
+﻿// jgruss
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -79,7 +81,8 @@ namespace sendApptEmail
             else
             {
                 messageBodyStud = "You have requested to meet " + mailToDisplayNameProf +
-                    " during normal office hours at " + apptStart.ToString() + " until " + apptEnd.ToString() +
+                    " during normal office hours at " + apptStart.ToString() + " until " + apptEnd.ToString() + "." +
+                    " The appointment will be in " + mailToDisplayNameProf + "'s office: " + location + ". " +
                     " The professor should respond to this outlook" +
                     " invitation by accepting or denying the request." +
                     " This message has been sent via the Office Hours Scheduling System.";
@@ -88,26 +91,13 @@ namespace sendApptEmail
             // set values in class
             this.setICSEmailValues(mailToAddressStudent, mailToDisplayNameStudent, mailToAddressProf, mailToDisplayNameProf,
             apptStart, apptEnd, location, messageBodyProf, messageBodyStud);
+
+            this.writeEmailDataToConsole();
+
+            // uncomment this following funtion to actually send the ics email
+
             // prepare and mail ics and emails from class data
-
-            this.SendEmailWithIcsAttachment();
-
-            /*
-            Console.Out.WriteLine("Student email: " + mailToAddress1);
-            Console.Out.WriteLine("Student name: " + mailToDisplayName1);
-
-            Console.Out.WriteLine("Professor email: " + mailToAddress2);
-            Console.Out.WriteLine("Professor name: " + mailToDisplayName2);
-
-            Console.Out.WriteLine("appt start: " + this.apptStart.ToString());
-            Console.Out.WriteLine("appt end: " + this.apptEnd.ToString());
-
-            Console.Out.WriteLine("Location: " + this.location);
-            Console.Out.WriteLine("Professor Message: " + this.messageBodyProf);
-            Console.Out.WriteLine("Student Message: " + this.messageBodyStud);
-            
-            Console.ReadKey();
-            */
+            //this.SendEmailWithIcsAttachment();
 
         }
 
@@ -202,6 +192,26 @@ namespace sendApptEmail
             smtpclient.Send(msgStud);
             smtpclient.Send(msgProf);
         }
+
+        private void writeEmailDataToConsole()
+        {
+            Console.Out.WriteLine("Student email: " + mailToAddress1);
+            Console.Out.WriteLine("Student name: " + mailToDisplayName1);
+
+            Console.Out.WriteLine("Professor email: " + mailToAddress2);
+            Console.Out.WriteLine("Professor name: " + mailToDisplayName2);
+
+            Console.Out.WriteLine("appt start: " + this.apptStart.ToString());
+            Console.Out.WriteLine("appt end: " + this.apptEnd.ToString());
+
+            Console.Out.WriteLine("Location: " + this.location);
+            Console.Out.WriteLine("Professor Message: " + this.messageBodyProf);
+            Console.Out.WriteLine("Student Message: " + this.messageBodyStud);
+
+            Console.ReadKey();
+        }
+
+
 
         // getters and setters
         public String MailFromAddress

@@ -48,7 +48,7 @@ namespace OfficeHours
             }
             else
             {
-                Response.Redirect("http://localhost:2966/calendar.aspx");
+                Response.Redirect("/calendar.aspx");
                 Label3.Text = null;
             }
         }

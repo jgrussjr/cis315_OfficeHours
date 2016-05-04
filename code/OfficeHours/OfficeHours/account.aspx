@@ -31,7 +31,7 @@
         
         
         
-        <asp:Image ID="Image1" runat="server"  onclick="window.location.href='http://localhost:2966/welcome.aspx'; return false;" ImageURL="~/Images/gannonlogo.png" style="z-index: 1; left: 0px; top: -5px; position: absolute; height: 80px; width: 190px; cursor:default; cursor:pointer" />
+        <asp:Image ID="Image1" runat="server"  onclick="window.location.href='/welcome.aspx'; return false;" ImageURL="~/Images/gannonlogo.png" style="z-index: 1; left: 0px; top: -5px; position: absolute; height: 80px; width: 190px; cursor:default; cursor:pointer" />
         
         
         

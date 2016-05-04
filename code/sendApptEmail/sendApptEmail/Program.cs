@@ -16,11 +16,11 @@ namespace sendApptEmail
             String requestorEmail = "gruss001@knights.gannon.edu";
             String requestorDisplayName = "James Gruss";
 
-            //String requesteeEmail = "mccracke007@knights.gannon.edu";
-            //String requesteeDisplayName = "Andrew McCracken";
+            String requesteeEmail = "mccracke007@knights.gannon.edu";
+            String requesteeDisplayName = "Andrew McCracken";
 
-            String requesteeEmail = "jgrussjr@gmail.com";
-            String requesteeDisplayName = "Prof JG";
+            //String requesteeEmail = "jgrussjr@gmail.com";
+            //String requesteeDisplayName = "Prof JG";
 
             //String requesteeEmail = "carlin010@knights.gannon.edu";
             //String requesteeDisplayName = "Nate Carlin";
