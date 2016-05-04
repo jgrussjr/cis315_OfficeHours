@@ -81,6 +81,21 @@ namespace OfficeHours
             Button3.UseSubmitBehavior = true;
             Button3.Enabled = true;
 
+            /* Make DateTime object here to pass to email function
+
+
+            //DateTime(Int32, Int32, Int32, Int32, Int32, Int32)
+
+            String date = Calendar1.SelectedDate.ToShortDateString();
+            String time = RadioButtonList1.SelectedItem.ToString();
+
+            Console.WriteLine(date);
+            Console.WriteLine(time);
+
+
+            DateTime nd = new DateTime();
+            */
+
         }
 
         protected void Button3_Click(object sender, EventArgs e)
@@ -100,8 +115,8 @@ namespace OfficeHours
 
 
             // Sends the email:
-            es.sendEmailInvite(studentemail, studentname, professoremail,
-            professorname, startDateTime, location, messageProf, messageStud);
+            //es.sendEmailInvite(studentemail, studentname, professoremail,
+            //professorname, startDateTime, location, messageProf, messageStud);
 
             Session["confirm"] = "Your Request Has Successfully Been Made! You should recieve an email soon.";
 
