@@ -82,8 +82,8 @@ namespace OfficeHours
 
 
             // Sends the email:
-            //es.sendEmailInvite(studentemail, studentname, professoremail,
-            //professorname, startDateTime, location, messageProf, messageStud);
+            es.sendEmailInvite(studentemail, studentname, professoremail,
+            professorname, startDateTime, location, messageProf, messageStud);
 
             Session["confirm"] = "Your Request Has Successfully Been Made! You should recieve an email soon.";
 
