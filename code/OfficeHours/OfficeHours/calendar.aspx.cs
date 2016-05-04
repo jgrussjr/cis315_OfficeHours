@@ -14,7 +14,7 @@ namespace OfficeHours
         private static CAFEData datasource = new CAFEData();
         private string currentDept;
         private string currentProf;
-        private string currentFacultyEmail;
+        //private string currentFacultyEmail;
         private string currentOffice;
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -73,10 +73,10 @@ namespace OfficeHours
 
             String studentemail = Session["email"].ToString();
             String studentname = Session["email"].ToString(); // Account Database Query
-            String professoremail = currentFacultyEmail; // CAFE Database Query
+            String professoremail = HiddenField2.Value.ToString();
             String professorname = DropDownList2.SelectedValue.ToString();
             DateTime startDateTime = Calendar1.SelectedDate; // Make date time object with day (from calendar) and time (from radio button selection)
-            String location = currentOffice; // CAFE Database Query
+            String location = currentOffice;
             String messageProf = TextBox1.Text.ToString();
             String messageStud = null;
 
@@ -120,8 +120,17 @@ namespace OfficeHours
             int currentFacultyID = facultyRecords[0].FacultyID;
             string currentFacultyEmail = facultyRecords[0].Email;
             string currentOffice = facultyRecords[0].Office;
-            this.setFacultyEmail(currentFacultyEmail);
+            //this.setFacultyEmail(currentFacultyEmail);
             this.setFacultyOffice(currentOffice);
+
+            string email = facultyRecords[0].Email.ToString();
+            string office = facultyRecords[0].Office.ToString();
+
+            HiddenField2.Value = email;
+
+            Label17.Text = "Office: " + office;
+
+            Label18.Text = "For: " + Calendar1.SelectedDate.DayOfWeek.ToString() + " (Select Above)";
 
             List<CAFEDataInterface.OfficeHour> currentOfficeHours = datasource.getOfficeHours(currentFacultyID, currentTerm);
 
@@ -238,10 +247,10 @@ namespace OfficeHours
             updateAvailableHoursTable();
         }
 
-        private void setFacultyEmail(String email)
-        {
-            this.currentFacultyEmail = email;
-        }
+        //private void setFacultyEmail(String email)
+        //{
+        //    this.currentFacultyEmail = email;
+        //}
 
         private void setFacultyOffice(String office)
         {
