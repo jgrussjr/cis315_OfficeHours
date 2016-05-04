@@ -65,6 +65,7 @@ namespace OfficeHours
         {
             TextBox1.Text = "I would like to request a meeting during your office hours on " + Calendar1.SelectedDate.DayOfWeek.ToString() +
                 " " + Calendar1.SelectedDate.ToShortDateString() + " " + RadioButtonList1.SelectedItem.ToString() + ".";
+
         }
 
         protected void Button3_Click(object sender, EventArgs e)
@@ -81,9 +82,11 @@ namespace OfficeHours
             String messageStud = null;
 
 
+
+
             // Sends the email:
-            //es.sendEmailInvite(studentemail, studentname, professoremail,
-            //professorname, startDateTime, location, messageProf, messageStud);
+            es.sendEmailInvite(studentemail, studentname, professoremail,
+            professorname, startDateTime, location, messageProf, messageStud);
 
             Session["confirm"] = "Your Request Has Successfully Been Made! You should recieve an email soon.";
 

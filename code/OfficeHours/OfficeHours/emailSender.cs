@@ -208,7 +208,7 @@ namespace sendApptEmail
             Console.Out.WriteLine("Professor Message: " + this.messageBodyProf);
             Console.Out.WriteLine("Student Message: " + this.messageBodyStud);
 
-            Console.ReadKey();
+            Console.Read();
         }
 
 
