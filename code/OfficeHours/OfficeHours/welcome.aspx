@@ -16,7 +16,7 @@
         <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ValidationGroup="Validation1" ErrorMessage="Please enter a @knights.gannon.edu email address." style="z-index: 1; left: 269px; top: 190px; position: absolute" ControlToValidate="TextBox1" ValidationExpression="^[a-z]+[0-9]{3}@knights\.gannon\.edu" ForeColor="#CC0000"></asp:RegularExpressionValidator>
         <asp:TextBox ID="TextBox1" TextMode="Email" placeholder="Email" runat="server" style="z-index: 1; left: 16px; top: 184px; position: absolute; width: 246px; height: 27px;"></asp:TextBox>
         <asp:TextBox ID="TextBox2" runat="server" placeholder="Password" TextMode="Password" style="z-index: 1; left: 16px; top: 222px; position: absolute; width: 246px; height: 27px;"></asp:TextBox>
-        <asp:Button ID="Button4" runat="server" OnClientClick="window.location.href='http://localhost:2966/account.aspx'; return false;" style="z-index: 1; left: 99px; top: 155px; position: absolute; width: 145px;" Text="Create Account" />
+        <asp:Button ID="Button4" runat="server" OnClientClick="window.location.href='/account.aspx'; return false;" style="z-index: 1; left: 99px; top: 155px; position: absolute; width: 145px;" Text="Create Account" />
     </div>
         
         

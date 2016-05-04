@@ -21,7 +21,7 @@
     <form id="form1" runat="server">
     <div>
         <asp:Label ID="Label2" runat="server" style="z-index: 1; left: 548px; top: 101px; position: absolute; margin-bottom: 0px;" ></asp:Label>
-        <asp:Button ID="Button2" runat="server" OnClientClick="window.location.href='http://localhost:2966/welcome.aspx'; return false;" style="z-index: 1; left: 13px; top: 94px; position: absolute" Text="Go Back" />
+        <asp:Button ID="Button2" runat="server" OnClientClick="window.location.href='/welcome.aspx'; return false;" style="z-index: 1; left: 13px; top: 94px; position: absolute" Text="Go Back" />
     </div>
         <asp:Label ID="Label4" runat="server" style="z-index: 1; left: 390px; top: 354px; position: absolute" Text="Message for professor (optional):"></asp:Label>
         <asp:Table 
@@ -51,7 +51,7 @@
         
         
         
-        <asp:Image ID="Image1" runat="server"  onclick="window.location.href='http://localhost:2966/welcome.aspx'; return false;" ImageURL="~/Images/gannonlogo.png" style="z-index: 1; left: 0px; top: -5px; position: absolute; height: 80px; width: 190px; cursor:default; cursor:pointer; right: 1644px;" />
+        <asp:Image ID="Image1" runat="server"  onclick="window.location.href='/welcome.aspx'; return false;" ImageURL="~/Images/gannonlogo.png" style="z-index: 1; left: 0px; top: -5px; position: absolute; height: 80px; width: 190px; cursor:default; cursor:pointer; right: 1644px;" />
         
         
         

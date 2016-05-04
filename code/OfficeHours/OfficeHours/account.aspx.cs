@@ -30,7 +30,7 @@ namespace OfficeHours
 
                 if (TextBox3.Text.ToString() != null && TextBox3.Text.ToString() != "")
                 {
-                    Response.Redirect("http://localhost:2966/welcome.aspx");
+                    Response.Redirect("/welcome.aspx");
                 }
             }
         }
