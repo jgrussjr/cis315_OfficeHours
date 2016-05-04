@@ -19,8 +19,20 @@ namespace OfficeHours
         protected void Page_Load(object sender, EventArgs e)
         {
 
+            //if(RadioButtonList1.Text == null || RadioButtonList1.Text == "")
+            //{
+            //    Button3.UseSubmitBehavior = false;
+            //    Button3.Enabled = false;
+            //}
+
             if (!IsPostBack)
             {
+                //if (RadioButtonList1.Text == null || RadioButtonList1.Text == "")
+                //{
+                //    Button3.UseSubmitBehavior = false;
+                //    Button3.Enabled = false;
+                //}
+
                 Label10.ForeColor = System.Drawing.Color.Red;
                 Session["confirm"] = "";
 
@@ -65,6 +77,8 @@ namespace OfficeHours
         {
             TextBox1.Text = "I would like to request a meeting during your office hours on " + Calendar1.SelectedDate.DayOfWeek.ToString() +
                 " " + Calendar1.SelectedDate.ToShortDateString() + " " + RadioButtonList1.SelectedItem.ToString() + ".";
+            Button3.UseSubmitBehavior = true;
+            Button3.Enabled = true;
         }
 
         protected void Button3_Click(object sender, EventArgs e)
@@ -102,6 +116,7 @@ namespace OfficeHours
 
         private void updateAvailableHoursTable()
         {
+
             Label2.Text = currentProf + "'s Office Hours";
 
             if (Session["email"] != null)
@@ -183,6 +198,12 @@ namespace OfficeHours
             tRow5.Cells.Add(tCell5);
 
             this.radioList(currentOfficeHours);
+
+            if (RadioButtonList1.Text == null || RadioButtonList1.Text == "")
+            {
+                Button3.UseSubmitBehavior = false;
+                Button3.Enabled = false;
+            }
         }
 
         private string findDayInOfficeHours(List<CAFEDataInterface.OfficeHour> theHoursList, string day)
