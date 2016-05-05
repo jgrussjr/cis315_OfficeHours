@@ -265,6 +265,24 @@ namespace OfficeHours {
         protected global::System.Web.UI.WebControls.HiddenField HiddenField2;
         
         /// <summary>
+        /// HiddenFieldDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField HiddenFieldDate;
+        
+        /// <summary>
+        /// HiddenFieldTime control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField HiddenFieldTime;
+        
+        /// <summary>
         /// Label19 control.
         /// </summary>
         /// <remarks>

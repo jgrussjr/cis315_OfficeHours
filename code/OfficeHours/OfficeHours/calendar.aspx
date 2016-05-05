@@ -82,6 +82,8 @@
         </p>
         <asp:HiddenField ID="HiddenField1" runat="server" />
         <asp:HiddenField ID="HiddenField2" runat="server" />
+        <asp:HiddenField ID="HiddenFieldDate" runat="server" />
+        <asp:HiddenField ID="HiddenFieldTime" runat="server" />
         <asp:Label ID="Label19" runat="server" style="z-index: 1; left: 844px; top: 220px; position: absolute; margin-bottom: 0px" Text="3. Select a Professor"></asp:Label>
         <asp:Button ID="Button3" runat="server" OnClick="Button3_Click" style="z-index: 1; left: 690px; top: 545px; position: absolute" Text="Submit Request" />
     </form>

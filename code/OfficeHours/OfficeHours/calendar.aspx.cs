@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using sendApptEmail;
 using CAFEDataInterface;
+using System.Text.RegularExpressions;
 
 namespace OfficeHours
 {
@@ -16,6 +17,9 @@ namespace OfficeHours
         private string currentProf;
         //private string currentFacultyEmail;
         private string currentOffice;
+        private string tempTime;
+        private string tempDate;
+        private DateTime finalDateTime;
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -66,6 +70,27 @@ namespace OfficeHours
             TextBox1.Text = "I would like to request a meeting during your office hours on " + Calendar1.SelectedDate.DayOfWeek.ToString() +
                 " " + Calendar1.SelectedDate.ToShortDateString() + " " + RadioButtonList1.SelectedItem.ToString() + ".";
 
+            string date = Calendar1.SelectedDate.ToShortDateString();
+            string time = RadioButtonList1.SelectedItem.ToString();
+            tempDate = date;
+            tempTime = time;
+
+
+            /*
+            if (this.dateTimeConversion() != true)
+            {
+                finalDateTime = Calendar1.SelectedDate;
+            }
+            */
+            finalDateTime = Calendar1.SelectedDate;
+
+
+            Button3.UseSubmitBehavior = true;
+            Button3.Enabled = true;
+
+            // Make DateTime object here to pass to email function
+            // 11/13/2015 9:30 AM.
+    
         }
 
         protected void Button3_Click(object sender, EventArgs e)
@@ -76,17 +101,16 @@ namespace OfficeHours
             String studentname = Session["email"].ToString(); // Account Database Query
             String professoremail = HiddenField2.Value.ToString();
             String professorname = DropDownList2.SelectedValue.ToString();
-            DateTime startDateTime = Calendar1.SelectedDate; // Make date time object with day (from calendar) and time (from radio button selection)
+            //DateTime startDateTime = Calendar1.SelectedDate; // Make date time object with day (from calendar) and time (from radio button selection)
             String location = currentOffice;
             String messageProf = TextBox1.Text.ToString();
-            String messageStud = null;
-
-
+            String messageStud = null; //in emailSender
 
 
             // Sends the email:
-            es.sendEmailInvite(studentemail, studentname, professoremail,
-            professorname, startDateTime, location, messageProf, messageStud);
+
+            //es.sendEmailInvite(studentemail, studentname, professoremail,
+            //professorname, finalDateTime, location, messageProf, messageStud);
 
             Session["confirm"] = "Your Request Has Successfully Been Made! You should recieve an email soon.";
 
@@ -241,6 +265,8 @@ namespace OfficeHours
 
                 }
             }
+
+
         }
         //OnSelectionChanged="Calendar1_SelectionChanged"
         protected void Calendar1_SelectionChanged(object sender, EventArgs e)
@@ -258,6 +284,77 @@ namespace OfficeHours
         private void setFacultyOffice(String office)
         {
             this.currentOffice = office;
+        }
+
+        private bool dateTimeConversion()
+        {
+
+            // do date spilt
+            string[] dateStringArr = new string[3];
+            dateStringArr = tempDate.Split('/');
+            Int32[] dateIntArr = new Int32[dateStringArr.Length];
+            int intDate = 0;
+            bool parsed;
+            for (int i = 0; i < dateStringArr.Length; i++)
+            {
+                parsed = Int32.TryParse(dateStringArr[i], out intDate);
+
+                if (parsed)
+                {
+                    dateIntArr[i] = intDate;
+                }
+                else
+                {
+                    Console.WriteLine("Date String '" + i + "' could not be parsed.");
+                    dateIntArr[i] = 0;
+                    return false;
+                }
+            }
+
+            // do time split
+            string pattern = @"(\d{1,2}):(\d{1,2}).*";
+            string[] timeStringArr = new string[2];
+            MatchCollection matches = Regex.Matches(tempTime, pattern);
+            int count = 0;
+            int groupNums = 0;
+            foreach (Match match in matches)
+            {
+                groupNums = (match.Groups.Count -1);
+                timeStringArr = new string[groupNums];
+                for (int i = 1; i <= groupNums; i++)
+                {
+                    timeStringArr[i -1] = match.Groups[i].Value; 
+                }
+                count = count + 1;
+                Console.WriteLine("Hour: ", match.Groups[1].Value);
+                Console.WriteLine("Minute: ", match.Groups[2].Value);
+                Console.WriteLine();
+            }
+
+            Int32[] timeIntArr = new Int32[timeStringArr.Length];
+            int intTime = 0;
+            bool parsedTime;
+            for (int i = 0; i < timeStringArr.Length; i++)
+            {
+                parsedTime = Int32.TryParse(timeStringArr[i], out intTime);
+
+                if (parsedTime)
+                {
+                    timeIntArr[i] = intTime;
+                }
+                else
+                {
+                    Console.WriteLine("Time String '" + i + "' could not be parsed.");
+                    timeIntArr[i] = 0;
+                    // datetime should be the input just date, generically
+                    return false;
+                }
+            }
+            DateTime newDateTime = new DateTime(dateIntArr[2], dateIntArr[1], dateIntArr[0],
+                timeIntArr[0], timeIntArr[1], 0, DateTimeKind.Utc);
+            this.finalDateTime = newDateTime;
+            return true;
+
         }
     }
 }
