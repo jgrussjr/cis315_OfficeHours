@@ -64,3 +64,4 @@ components are fully integrated and interfacing together at the time of the end 
 not connect to the login database for login. The appointments database is also currently not integrated. Finally, the sending
 of the ICS email from the webapp is not fully connected. Testing and demonstration of the email component can be done cia the email subcomponent. 
 
+
