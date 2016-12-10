@@ -15,7 +15,7 @@ namespace CAFEDataInterface
 
         public LoginManager()
         {
-            myDB = new LoginManagerDataContext("Data Source=SEDEV2\\OFFICEHOURS;Initial Catalog=CAFE;Integrated Security=True");
+            myDB = new LoginManagerDataContext("Data Source=SEDEV2\\OFFICEHOURS;Initial Catalog=Appointments;Integrated Security=True");
         }
 
         public bool createNewUser(String firstName, String lastName, String emailAddress, String password)
