@@ -13,13 +13,40 @@ namespace OfficeHours {
     public partial class Registration {
         
         /// <summary>
-        /// txtUsername control.
+        /// form1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtUsername;
+        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+        
+        /// <summary>
+        /// txtEmail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtEmail;
+        
+        /// <summary>
+        /// txtFirst control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtFirst;
+        
+        /// <summary>
+        /// txtLast control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtLast;
         
         /// <summary>
         /// txtPassword control.
@@ -38,14 +65,5 @@ namespace OfficeHours {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtConfirmPassword;
-        
-        /// <summary>
-        /// txtEmail control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtEmail;
     }
 }
