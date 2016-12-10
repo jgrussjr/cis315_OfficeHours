@@ -4,12 +4,14 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using CAFEDataInterface;
 
 namespace OfficeHours
 {
     public partial class WebForm1 : System.Web.UI.Page
     {
-        private static LoginManagerDataContext datasource = new LoginManagerDataContext();
+        //private static LoginManagerDataContext datasource = new LoginManagerDataContext();
+        private static LoginManager datasource = new LoginManager();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -42,14 +44,21 @@ namespace OfficeHours
         // Query Account Database to validate email/password
         protected void Button5_Click(object sender, EventArgs e)
         {
+            String email = TextBox1.Text;
+            String password = TextBox2.Text;
+
             if (TextBox2.Text.ToString() == "" || TextBox2.Text.ToString() == null)
             {
 
             }
-            else
+            else if (datasource.checkPassword(email, password))
             {
                 Response.Redirect("/calendar.aspx");
                 Label3.Text = null;
+            }
+            else
+            {
+
             }
         }
     }
