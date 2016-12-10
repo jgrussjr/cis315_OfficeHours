@@ -36,7 +36,7 @@
 
             ID="Table1" runat="server" style="z-index: 1; left: 389px; top: 124px; position: absolute; height: 220px; width: 443px">
         </asp:Table>
-        <asp:Label ID="Label5" runat="server" style="z-index: 1; left: 395px; top: 1px; position: absolute" Text="Office Hours Scheduling System" Font-Bold="True" Font-Size="XX-Large"></asp:Label>
+        <asp:Label ID="Label5" runat="server" style="z-index: 1; left: 396px; top: 1px; position: absolute" Text="OOffice Hours Scheduling System" Font-Bold="True" Font-Size="XX-Large"></asp:Label>
         <p>
         <asp:Label ID="Label3" runat="server" style="z-index: 1; left: 232px; top: 376px; position: absolute; bottom: 199px;" Text="Choose Time:"></asp:Label>
             <asp:Label ID="Label6" runat="server" style="z-index: 1; left: 105px; top: 95px; position: absolute; width: 357px; height: 27px;" inputtype="text" placeholder="search" ></asp:Label>

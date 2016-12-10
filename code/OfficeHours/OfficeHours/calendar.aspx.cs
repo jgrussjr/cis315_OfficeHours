@@ -41,7 +41,7 @@ namespace OfficeHours
 
                 List<String> departments = datasource.getDepartments();
 
-                DropDownList3.Items.Clear();
+                //DropDownList3.Items.Clear();
 
                 for (int i = 0; i < departments.Count(); i++)
                 {
