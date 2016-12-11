@@ -66,30 +66,34 @@ namespace OfficeHours
             */
 
             // get data from UI
-            String firstName = txtFirstName.Text.Trim();
-            String lastName = txtLastName.Text.Trim();
+            String firstName = txtFirst.Text.Trim();
+            String lastName = txtLast.Text.Trim();
             String password = txtPassword.Text.Trim();
             String email = txtEmail.Text.Trim();
 
             // attempt to create new user
-            bool success = datasource.createNewUser(firstName, lastName, email, password);
+            string success = datasource.createNewUser(firstName, lastName, email, password);
 
             string message = string.Empty;
             switch (success)
             {
-                case false:
-                    message = "Supplied email address has already been used.";
+                case "duplicate":
+                    message = "duplicate";
                     break;
-                case true:
+                case "true":
                     message = "Registration successful.\\nEmail Address: " + email.ToString();
+                    break;
+                case "exception":
+                    message = "exception";
+                    break;
+                default:
+                    message = "IDK man... Registration successful.\\nUser Id: " + email.ToString();
                     break;
             }
             // Not sure what this part does
             ClientScript.RegisterStartupScript(GetType(), "alert", "alert('" + message + "');", true);
 
-
-
-
+            //Response.Redirect("/welcome.aspx");
 
 
         }
