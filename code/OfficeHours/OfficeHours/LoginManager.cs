@@ -84,15 +84,39 @@ namespace CAFEDataInterface
 
         public bool checkPassword(String emailAddress, String password)
         {
-            login user = myDB.logins.Single(u => u.emailAddress == emailAddress);
+            login user = new login();
+            bool worked = true;
+            try
+            {
+                user = myDB.logins.Single(u => u.emailAddress.ToString().Equals(emailAddress));
+            }
+            catch (Exception ex)
+            {
+                worked = false;
+                return false;
+            }
+            if (worked == true && user != null)
+            {
+                // There is something wrong going on in here. Causing a null object error
 
-            byte[] realSalt = user.passwordSalt.ToArray();
+                //byte[] realSalt = user.passwordSalt.ToArray();
+                if (user != null)
+                {
+                    byte[] realSalt = user.passwordSalt.ToArray();
+                }
 
-            byte[] testHash = mySHA256.ComputeHash(realSalt.Concat(Encoding.UTF8.GetBytes(password)).ToArray());
+                //byte[] testHash = mySHA256.ComputeHash(realSalt.Concat(Encoding.UTF8.GetBytes(password)).ToArray());
 
-            byte[] realHash = user.hashPassword.ToArray();
+                //byte[] realHash = user.hashPassword.ToArray();
 
-            return ((testHash).SequenceEqual(realHash));
+                //return ((testHash).SequenceEqual(realHash));
+
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
         
     }

@@ -44,23 +44,32 @@ namespace OfficeHours
         // Query Account Database to validate email/password
         protected void Button5_Click(object sender, EventArgs e)
         {
-            String email = TextBox1.Text;
-            String password = TextBox2.Text;
+            String email = TextBox1.Text.ToString();
+            String password = TextBox2.Text.ToString();
+            if (password != null && email != null)
+            {
+                if (email == "")
+                {
+                    string message = "Please enter an email or create an account. No email entered.";
+                    ClientScript.RegisterStartupScript(GetType(), "alert", "alert('" + message + "');", true);
+                }
+                else if (password == "")
+                {
+                    string message = "Please enter a valid password or create an account. No password entered.";
+                    ClientScript.RegisterStartupScript(GetType(), "alert", "alert('" + message + "');", true);
+                }
+                else if (datasource.checkPassword(email, password))
+                {
+                    //Label3.Text = null;
+                    //ClientScript.RegisterStartupScript(GetType(), "alert", "alert('" + "password matched!" + "');", true);
+                    Response.Redirect("/calendar.aspx");
+                }
+                else
+                {
+                    string message = "Username or password match does not exist. Please enter a valid username and password combination.";
+                    ClientScript.RegisterStartupScript(GetType(), "alert", "alert('" + message + "');", true);
 
-            if (TextBox2.Text.ToString() == "" || TextBox2.Text.ToString() == null)
-            {
-
-            }
-            else if (datasource.checkPassword(email, password))
-            {
-                //Response.Redirect("/calendar.aspx");
-                Label3.Text = null;
-                ClientScript.RegisterStartupScript(GetType(), "alert", "alert('" + "password matched!" + "');", true);
-            }
-            else
-            {
-                ClientScript.RegisterStartupScript(GetType(), "alert", "alert('" + "password not matched!" + "');", true);
-                //Response.Redirect("/calendar.aspx");
+                }
             }
         }
     }

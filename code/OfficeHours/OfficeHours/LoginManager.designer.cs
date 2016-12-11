@@ -195,7 +195,7 @@ namespace CAFEDataInterface
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_passwordSalt", DbType="Binary(150) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_passwordSalt", DbType="Binary(128) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
 		public System.Data.Linq.Binary passwordSalt
 		{
 			get
