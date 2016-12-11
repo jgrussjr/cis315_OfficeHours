@@ -97,21 +97,21 @@ namespace CAFEDataInterface
             }
             if (worked == true && user != null)
             {
-                // There is something wrong going on in here. Causing a null object error
+                // There is (was) something wrong going on in here. Causing a null object error
 
-                //byte[] realSalt = user.passwordSalt.ToArray();
                 if (user != null)
                 {
                     byte[] realSalt = user.passwordSalt.ToArray();
+
+                    byte[] testHash = mySHA256.ComputeHash(realSalt.Concat(Encoding.UTF8.GetBytes(password)).ToArray());
+
+                    byte[] realHash = user.hashPassword.ToArray();
+
+                    return ((testHash).SequenceEqual(realHash));
                 }
-
-                //byte[] testHash = mySHA256.ComputeHash(realSalt.Concat(Encoding.UTF8.GetBytes(password)).ToArray());
-
-                //byte[] realHash = user.hashPassword.ToArray();
-
-                //return ((testHash).SequenceEqual(realHash));
-
-                return true;
+                else {
+                    return true;
+                }
             }
             else
             {

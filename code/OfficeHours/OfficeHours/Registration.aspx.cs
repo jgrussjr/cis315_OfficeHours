@@ -24,47 +24,6 @@ namespace OfficeHours
 
         protected void RegisterUser(object sender, EventArgs e)
         {
-            /*
-            
-            int userId = 0;
-            //database stuff needs changed 12/10
-            string constr = ConfigurationManager.ConnectionStrings["constr"].ConnectionString;
-            using (SqlConnection con = new SqlConnection(constr))
-            {
-                using (SqlCommand cmd = new SqlCommand("Insert_User"))
-                {
-                    using (SqlDataAdapter sda = new SqlDataAdapter())
-                    {
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@Username", txtUsername.Text.Trim());
-                        cmd.Parameters.AddWithValue("@Password", txtPassword.Text.Trim());
-                        cmd.Parameters.AddWithValue("@Email", txtEmail.Text.Trim());
-                        cmd.Connection = con;
-                        con.Open();
-                        userId = Convert.ToInt32(cmd.ExecuteScalar());
-                        con.Close();
-                    }
-                }
-                string message = string.Empty;
-                // if the create new user function returns false, we want the following error conditons
-                switch (userId)
-                {
-                    case -1:
-                        message = "Username already exists.\\nPlease choose a different username.";
-                        break;
-                    case -2:
-                        message = "Supplied email address has already been used.";
-                        break;
-                    default:
-                        message = "Registration successful.\\nUser Id: " + userId.ToString();
-                        break;
-                }
-                ClientScript.RegisterStartupScript(GetType(), "alert", "alert('" + message + "');", true);
-            }
-
-            END OLD  FROM EXAMPLE
-            */
-
             // get data from UI
             String firstName = txtFirst.Text.Trim();
             String lastName = txtLast.Text.Trim();
@@ -79,16 +38,17 @@ namespace OfficeHours
             switch (success)
             {
                 case "duplicate":
-                    message = "duplicate";
+                    message = "Registration failed.\\n" + email.ToString() + " is already associated with an account.";
                     break;
                 case "true":
-                    message = "Registration successful.\\nEmail Address: " + email.ToString();
+                    message = "Registration successful.\\n" + "Email Address: " + email.ToString();
                     break;
                 case "exception":
-                    message = successes[1];
+                    //message = successes[1];
+                    message = "An unknown error occured in creating the account.";
                     break;
                 default:
-                    message = "IDK man... Registration successful.\\nUser Id: " + email.ToString();
+                    message = "IDK man... Registration successful?\\nUser Id: " + email.ToString();
                     break;
             }
             ClientScript.RegisterStartupScript(GetType(), "alert", "alert('" + message + "');", true);
