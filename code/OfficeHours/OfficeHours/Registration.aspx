@@ -116,6 +116,19 @@
     </table>
             </div>
     </form>
+    <div style="width: auto; margin: 0 33%;">
+    <table border="0" cellpadding="0" cellspacing="0">
+        <tr>
+            <td>
+            </td>
+            <td>
+                <a href="/welcome.aspx">Return to Welcome Page</a>
+            </td>
+            <td>
+            </td>
+        </tr>
+        </table>
+    </div>
 </body>
 </html>
 

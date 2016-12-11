@@ -106,8 +106,8 @@ namespace OfficeHours
     partial void OnemailAddressChanged();
     partial void OnpasswordSaltChanging(System.Data.Linq.Binary value);
     partial void OnpasswordSaltChanged();
-    partial void OnpasswordHashChanging(System.Data.Linq.Binary value);
-    partial void OnpasswordHashChanged();
+    partial void OnhashPasswordChanging(System.Data.Linq.Binary value);
+    partial void OnhashPasswordChanged();
     #endregion
 		
 		public login()
@@ -215,8 +215,8 @@ namespace OfficeHours
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_passwordHash", DbType="Binary(32) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
-		public System.Data.Linq.Binary passwordHash
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="passwordHash", Storage="_passwordHash", DbType="Binary(32) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		public System.Data.Linq.Binary hashPassword
 		{
 			get
 			{
@@ -226,11 +226,11 @@ namespace OfficeHours
 			{
 				if ((this._passwordHash != value))
 				{
-					this.OnpasswordHashChanging(value);
+					this.OnhashPasswordChanging(value);
 					this.SendPropertyChanging();
 					this._passwordHash = value;
-					this.SendPropertyChanged("passwordHash");
-					this.OnpasswordHashChanged();
+					this.SendPropertyChanged("hashPassword");
+					this.OnhashPasswordChanged();
 				}
 			}
 		}

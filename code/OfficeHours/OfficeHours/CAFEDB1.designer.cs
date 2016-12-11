@@ -45,7 +45,7 @@ namespace OfficeHours
     #endregion
 		
 		public CAFEDBDataContext() : 
-				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["CAFEConnectionString"].ConnectionString, mappingSource)
+				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["CAFEConnectionStringLocal"].ConnectionString, mappingSource)
 		{
 			OnCreated();
 		}

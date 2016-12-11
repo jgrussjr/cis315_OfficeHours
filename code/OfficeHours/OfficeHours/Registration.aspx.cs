@@ -72,7 +72,8 @@ namespace OfficeHours
             String email = txtEmail.Text.Trim();
 
             // attempt to create new user
-            string success = datasource.createNewUser(firstName, lastName, email, password);
+            string[] successes = datasource.createNewUser(firstName, lastName, email, password);
+            string success = successes[0];
 
             string message = string.Empty;
             switch (success)
@@ -84,18 +85,22 @@ namespace OfficeHours
                     message = "Registration successful.\\nEmail Address: " + email.ToString();
                     break;
                 case "exception":
-                    message = "exception";
+                    message = successes[1];
                     break;
                 default:
                     message = "IDK man... Registration successful.\\nUser Id: " + email.ToString();
                     break;
             }
-            // Not sure what this part does
             ClientScript.RegisterStartupScript(GetType(), "alert", "alert('" + message + "');", true);
 
             //Response.Redirect("/welcome.aspx");
 
 
+        }
+
+        protected void ReturnToWelcome(object sender, EventArgs e)
+        {
+            Response.Redirect("/welcome.aspx");
         }
     }
 }

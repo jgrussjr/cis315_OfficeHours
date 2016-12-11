@@ -90,7 +90,7 @@ namespace CAFEDataInterface
 		
 		private System.Data.Linq.Binary _passwordSalt;
 		
-		private System.Data.Linq.Binary _passwordHash;
+		private System.Data.Linq.Binary _hashPassword;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -106,8 +106,8 @@ namespace CAFEDataInterface
     partial void OnemailAddressChanged();
     partial void OnpasswordSaltChanging(System.Data.Linq.Binary value);
     partial void OnpasswordSaltChanged();
-    partial void OnpasswordHashChanging(System.Data.Linq.Binary value);
-    partial void OnpasswordHashChanged();
+    partial void OnhashPasswordChanging(System.Data.Linq.Binary value);
+    partial void OnhashPasswordChanged();
     #endregion
 		
 		public login()
@@ -195,7 +195,7 @@ namespace CAFEDataInterface
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_passwordSalt", DbType="Binary(128) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_passwordSalt", DbType="Binary(150) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
 		public System.Data.Linq.Binary passwordSalt
 		{
 			get
@@ -215,22 +215,22 @@ namespace CAFEDataInterface
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_passwordHash", DbType="Binary(32) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_hashPassword", DbType="Binary(32) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
 		public System.Data.Linq.Binary hashPassword
 		{
 			get
 			{
-				return this._passwordHash;
+				return this._hashPassword;
 			}
 			set
 			{
-				if ((this._passwordHash != value))
+				if ((this._hashPassword != value))
 				{
-					this.OnpasswordHashChanging(value);
+					this.OnhashPasswordChanging(value);
 					this.SendPropertyChanging();
-					this._passwordHash = value;
-					this.SendPropertyChanged("passwordHash");
-					this.OnpasswordHashChanged();
+					this._hashPassword = value;
+					this.SendPropertyChanged("hashPassword");
+					this.OnhashPasswordChanged();
 				}
 			}
 		}
