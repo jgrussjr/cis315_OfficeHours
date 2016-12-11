@@ -97,7 +97,7 @@ namespace sendApptEmail
             // uncomment this following funtion to actually send the ics email
 
             // prepare and mail ics and emails from class data
-            //this.SendEmailWithIcsAttachment();
+            this.SendEmailWithIcsAttachment();
 
         }
 

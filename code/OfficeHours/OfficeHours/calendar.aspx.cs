@@ -115,11 +115,16 @@ namespace OfficeHours
 
 
             // Sends the email:
-            //es.sendEmailInvite(studentemail, studentname, professoremail,
-            //professorname, startDateTime, location, messageProf, messageStud);
-
-            Session["confirm"] = "Your Request Has Successfully Been Made! You should recieve an email soon.";
-
+            if (DropDownList3.SelectedValue.Equals("Student Teachers"))
+            {
+                es.sendEmailInvite(studentemail, studentname, professoremail,
+                professorname, startDateTime, location, messageProf, messageStud);
+                Session["confirm"] = "Your Request Has Successfully Been Made! You should recieve an email soon.";
+            }
+            else
+            {
+                Session["confirm"] = "Select a Student Teacher";
+            }
             Response.Redirect("/welcome.aspx");
         }
 
