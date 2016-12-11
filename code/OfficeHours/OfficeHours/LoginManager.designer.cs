@@ -216,7 +216,7 @@ namespace CAFEDataInterface
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_passwordHash", DbType="Binary(32) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
-		public System.Data.Linq.Binary passwordHash
+		public System.Data.Linq.Binary hashPassword
 		{
 			get
 			{

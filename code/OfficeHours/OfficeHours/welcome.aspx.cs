@@ -53,12 +53,14 @@ namespace OfficeHours
             }
             else if (datasource.checkPassword(email, password))
             {
-                Response.Redirect("/calendar.aspx");
+                //Response.Redirect("/calendar.aspx");
                 Label3.Text = null;
+                ClientScript.RegisterStartupScript(GetType(), "alert", "alert('" + "password matched!" + "');", true);
             }
             else
             {
-
+                ClientScript.RegisterStartupScript(GetType(), "alert", "alert('" + "password not matched!" + "');", true);
+                //Response.Redirect("/calendar.aspx");
             }
         }
     }

@@ -18,13 +18,14 @@ namespace CAFEDataInterface
             myDB = new LoginManagerDataContext("Data Source=SEDEV2\\OFFICEHOURS;Initial Catalog=Appointments;Integrated Security=True");
         }
 
-        public bool createNewUser(String firstName, String lastName, String emailAddress, String password)
+        public string createNewUser(String firstName, String lastName, String emailAddress, String password)
         {
+            string returnMessage = string.Empty;
             var checkDuplicate = from user in myDB.logins
                                  where user.emailAddress == emailAddress select user;
 
             if (checkDuplicate.Count() != 0)
-                return false;
+                return "duplicate";
 
             login newRecord = new login();
             Byte[] salt = new Byte[128];
@@ -35,7 +36,7 @@ namespace CAFEDataInterface
             rngCsp.GetBytes(salt);
             newRecord.passwordSalt = salt;
             byte[] saltedPass = salt.Concat(Encoding.UTF8.GetBytes(password)).ToArray();
-            newRecord.passwordHash = mySHA256.ComputeHash(saltedPass);
+            newRecord.hashPassword = mySHA256.ComputeHash(saltedPass);
 
             myDB.logins.InsertOnSubmit(newRecord);
             try
@@ -45,9 +46,9 @@ namespace CAFEDataInterface
             catch (Exception e)
             {
                 System.Console.WriteLine(e);
-                return false;
+                return "exception";
             }
-            return true;
+            return "true";
         }
 
         public bool deleteUser(String emailAddress)
@@ -84,9 +85,10 @@ namespace CAFEDataInterface
 
             byte[] testHash = mySHA256.ComputeHash(realSalt.Concat(Encoding.UTF8.GetBytes(password)).ToArray());
 
-            byte[] realHash = user.passwordHash.ToArray();
+            byte[] realHash = user.hashPassword.ToArray();
 
-            return (testHash.SequenceEqual(realHash));
+            return ((testHash).SequenceEqual(realHash));
         }
+        
     }
 }
