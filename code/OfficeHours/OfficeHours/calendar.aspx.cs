@@ -19,19 +19,9 @@ namespace OfficeHours
         protected void Page_Load(object sender, EventArgs e)
         {
 
-            //if(RadioButtonList1.Text == null || RadioButtonList1.Text == "")
-            //{
-            //    Button3.UseSubmitBehavior = false;
-            //    Button3.Enabled = false;
-            //}
-
             if (!IsPostBack)
             {
-                //if (RadioButtonList1.Text == null || RadioButtonList1.Text == "")
-                //{
-                //    Button3.UseSubmitBehavior = false;
-                //    Button3.Enabled = false;
-                //}
+
 
                 Label10.ForeColor = System.Drawing.Color.Red;
                 Session["confirm"] = "";
@@ -41,7 +31,6 @@ namespace OfficeHours
 
                 List<String> departments = datasource.getDepartments();
 
-                //DropDownList3.Items.Clear();
 
                 for (int i = 0; i < departments.Count(); i++)
                 {
@@ -53,12 +42,17 @@ namespace OfficeHours
                 currentProf = DropDownList2.SelectedValue;
                 updateAvailableHoursTable();
             }
+            else
+            {
+                
+            }
 
 
         }
 
         protected void DropDownList3_SelectedIndexChanged(object sender, EventArgs e)
         {
+            TextBox1.Text = "";
             currentDept = DropDownList3.SelectedValue;
             updateFacultyDropDown();
             currentProf = DropDownList2.SelectedValue;
@@ -68,6 +62,7 @@ namespace OfficeHours
 
         protected void DropDownList2_SelectedIndexChanged(object sender, EventArgs e)
         {
+            TextBox1.Text = "";
             currentProf = DropDownList2.SelectedValue;
             RadioButtonList1.Items.Clear();
             updateAvailableHoursTable();
@@ -81,20 +76,10 @@ namespace OfficeHours
             Button3.UseSubmitBehavior = true;
             Button3.Enabled = true;
 
-            /* Make DateTime object here to pass to email function
+            currentProf = DropDownList2.SelectedValue;
+            updateAvailableHoursTable();
 
 
-            //DateTime(Int32, Int32, Int32, Int32, Int32, Int32)
-
-            String date = Calendar1.SelectedDate.ToShortDateString();
-            String time = RadioButtonList1.SelectedItem.ToString();
-
-            Console.WriteLine(date);
-            Console.WriteLine(time);
-
-
-            DateTime nd = new DateTime();
-            */
 
         }
 
@@ -145,7 +130,7 @@ namespace OfficeHours
 
             if (Session["email"] != null)
             {
-                Label6.Text = Session["email"].ToString();
+                Label6.Text = "Hello " + Session["email"].ToString() + "!";
             }
             else
             {
@@ -262,31 +247,36 @@ namespace OfficeHours
 
             return result;
         }
+       
 
         private void radioList(List<CAFEDataInterface.OfficeHour> theHoursList)
         {
-            string result;
-
-            for (int i = 0; i < theHoursList.Count; i++)
+            if (RadioButtonList1.Items.Count == 0)
             {
-                if (theHoursList[i].Day == Calendar1.SelectedDate.DayOfWeek.ToString())
+                string result;
+
+                for (int i = 0; i < theHoursList.Count; i++)
                 {
-                    DateTime fromTime = theHoursList[i].FromTime;
-                    RadioButtonList1.Items.Add(new ListItem(fromTime.ToShortTimeString()));
-                    while (fromTime.AddMinutes(+30) < theHoursList[i].ToTime)
+                    if (theHoursList[i].Day == Calendar1.SelectedDate.DayOfWeek.ToString())
                     {
-                        fromTime = fromTime.AddMinutes(+30);
-                        result = fromTime.ToShortTimeString();
+                        DateTime fromTime = theHoursList[i].FromTime;
+                        RadioButtonList1.Items.Add(new ListItem(fromTime.ToShortTimeString()));
+                        while (fromTime.AddMinutes(+30) < theHoursList[i].ToTime)
+                        {
+                            fromTime = fromTime.AddMinutes(+30);
+                            result = fromTime.ToShortTimeString();
 
-                        RadioButtonList1.Items.Add(new ListItem(result));
+                            RadioButtonList1.Items.Add(new ListItem(result));
+                        }
+
                     }
-
                 }
             }
         }
         //OnSelectionChanged="Calendar1_SelectionChanged"
         protected void Calendar1_SelectionChanged(object sender, EventArgs e)
         {
+            TextBox1.Text = "";
             currentProf = DropDownList2.SelectedValue;
             RadioButtonList1.Items.Clear();
             updateAvailableHoursTable();
