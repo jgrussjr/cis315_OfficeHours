@@ -95,7 +95,6 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="account.aspx" />
     <Content Include="Images\gannonlogo.png" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
@@ -134,13 +133,6 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="account.aspx.cs">
-      <DependentUpon>account.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="account.aspx.designer.cs">
-      <DependentUpon>account.aspx</DependentUpon>
-    </Compile>
     <Compile Include="CAFEData.cs" />
     <Compile Include="CAFEDB.designer.cs" />
     <Compile Include="CAFEDB1.designer.cs">
