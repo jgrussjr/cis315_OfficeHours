@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace sendApptEmail
 {
-    class Program
+    class EmailSenderUnitTester
     {
         static void Main(string[] args)
         {
