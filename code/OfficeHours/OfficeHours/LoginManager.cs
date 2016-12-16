@@ -85,22 +85,17 @@ namespace CAFEDataInterface
         public bool checkPassword(String emailAddress, String password)
         {
             login user = new login();
-            bool worked = true;
             try
             {
                 user = myDB.logins.Single(u => u.emailAddress.ToString().Equals(emailAddress));
             }
             catch (Exception ex)
             {
-                worked = false;
                 return false;
             }
-            if (worked == true && user != null)
+            if (user != null)
             {
-                // There is (was) something wrong going on in here. Causing a null object error
-
-                if (user != null)
-                {
+                // There (was) something wrong going on in here. Causing a null object error
                     byte[] realSalt = user.passwordSalt.ToArray();
 
                     byte[] testHash = mySHA256.ComputeHash(realSalt.Concat(Encoding.UTF8.GetBytes(password)).ToArray());
@@ -108,10 +103,6 @@ namespace CAFEDataInterface
                     byte[] realHash = user.hashPassword.ToArray();
 
                     return ((testHash).SequenceEqual(realHash));
-                }
-                else {
-                    return true;
-                }
             }
             else
             {
