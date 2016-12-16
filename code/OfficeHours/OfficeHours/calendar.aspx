@@ -62,7 +62,7 @@
         </asp:RadioButtonList>
         <asp:TextBox ID="TextBox1" runat="server" TextMode="MultiLine" style="z-index: 1; resize:none; left: 387px; top: 380px; position: absolute; height: 153px; width: 440px"></asp:TextBox>
         
-        <asp:DropDownList ID="DropDownList2" runat="server" autopostback="True" style="z-index: 1; left: 17px; top: 460px; position: absolute; right: 1060px;" OnSelectedIndexChanged="DropDownList2_SelectedIndexChanged">
+        <asp:DropDownList ID="DropDownList2" runat="server" autopostback="True" style="z-index: 1; left: 17px; top: 460px; position: absolute; right: 971px;" OnSelectedIndexChanged="DropDownList2_SelectedIndexChanged">
         </asp:DropDownList>
         <asp:Label ID="Label7" runat="server" style="z-index: 1; left: 19px; top: 435px; position: absolute" Text="Choose Professor:"></asp:Label>
         <asp:Label ID="Label8" runat="server" style="z-index: 1; left: 19px; top: 376px; position: absolute" Text="Department Filter:"></asp:Label>

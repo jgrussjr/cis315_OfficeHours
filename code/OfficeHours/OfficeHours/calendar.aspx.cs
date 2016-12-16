@@ -100,7 +100,7 @@ namespace OfficeHours
 
 
             // Sends the email:
-            if (DropDownList3.SelectedValue.Equals("Student Teachers"))
+            if ((DropDownList3.SelectedValue.Equals("Student Teachers")) || (DropDownList3.SelectedValue.Equals("Computer and Information Science/Software Engineering", StringComparison.InvariantCultureIgnoreCase) && (DropDownList2.SelectedValue.Equals("Tang"))))
             {
                 es.sendEmailInvite(studentemail, studentname, professoremail,
                 professorname, startDateTime, location, messageProf, messageStud);
@@ -108,7 +108,7 @@ namespace OfficeHours
             }
             else
             {
-                Session["confirm"] = "Select a Student Teacher";
+                Session["confirm"] = "No Email Sent; Select a Student Teacher or Dr. Tang";
             }
             Response.Redirect("/welcome.aspx");
         }
