@@ -18,15 +18,13 @@ namespace CAFEDataInterface
             myDB = new LoginManagerDataContext("Data Source=SEDEV2\\OFFICEHOURS;Initial Catalog=Appointments;Integrated Security=True");
         }
 
-        public string[] createNewUser(String firstName, String lastName, String emailAddress, String password)
+        public string createNewUser(String firstName, String lastName, String emailAddress, String password)
         {
             string returnMessage = string.Empty;
             var checkDuplicate = from user in myDB.logins
                                  where user.emailAddress == emailAddress select user;
-
-            string[] dups = new string[2] { "duplicate", ""};
             if (checkDuplicate.Count() != 0)
-                return dups;
+                return "duplicate";
 
             login newRecord = new login();
             Byte[] salt = new Byte[128];
@@ -48,12 +46,10 @@ namespace CAFEDataInterface
             {
                 System.Console.WriteLine(e);
                 string thing = e.ToString();
-                string[] exc = new string[2] { "exception", "Problem adding record to database" };
-                return exc;
+                return "exception";
             }
             
-            string[] good = new string[2] { "true", "" };
-            return good;
+            return "true";
         }
 
         public bool deleteUser(String emailAddress)
@@ -86,12 +82,14 @@ namespace CAFEDataInterface
         {
             login user = new login();
             try
+
             {
                 user = myDB.logins.Single(u => u.emailAddress.ToString().Equals(emailAddress));
             }
             catch (Exception ex)
             {
                 return false;
+
             }
             if (user != null)
             {

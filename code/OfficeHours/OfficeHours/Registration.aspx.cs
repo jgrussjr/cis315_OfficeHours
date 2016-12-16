@@ -31,8 +31,7 @@ namespace OfficeHours
             String email = txtEmail.Text.Trim();
 
             // attempt to create new user
-            string[] successes = datasource.createNewUser(firstName, lastName, email, password);
-            string success = successes[0];
+            string success = datasource.createNewUser(firstName, lastName, email, password);
 
             string message = string.Empty;
             switch (success)
