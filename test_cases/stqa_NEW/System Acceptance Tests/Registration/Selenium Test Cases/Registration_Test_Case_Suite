@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+  <title>Test Suite</title>
+</head>
+<body>
+<table id="suiteTable" cellpadding="1" cellspacing="1" border="1" class="selenium"><tbody>
+<tr><td><b>Test Suite</b></td></tr>
+<tr><td><a href="TestCase1.html">TestCase1</a></td></tr>
+<tr><td><a href="TestCase2.html">TestCase2</a></td></tr>
+<tr><td><a href="TestCase3.html">TestCase3</a></td></tr>
+<tr><td><a href="TestCase4.html">TestCase4</a></td></tr>
+<tr><td><a href="TestCase5.html">TestCase5</a></td></tr>
+<tr><td><a href="TestCase6.html">TestCase6</a></td></tr>
+<tr><td><a href="TestCase7.html">TestCase7</a></td></tr>
+<tr><td><a href="TestCase8.html">TestCase8</a></td></tr>
+<tr><td><a href="TestCase9.html">TestCase9</a></td></tr>
+<tr><td><a href="TestCase10.html">TestCase10</a></td></tr>
+<tr><td><a href="TestCase11.html">TestCase11</a></td></tr>
+</tbody></table>
+</body>
+</html>
